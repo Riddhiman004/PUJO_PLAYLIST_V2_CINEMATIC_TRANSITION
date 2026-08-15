@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PUJO PLAYLIST — A Living Soundtrack for Sharodiya</title>
+  <meta name="description" content="PUJO PLAYLIST — Old Gold, New Dance Pujo and Mahalaya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="evening">
+  <div class="ambient-backdrop" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="sun"></div>
+    <div class="temple-silhouette"></div>
+    <div class="kash-field"></div>
+  </div>
+  <div id="particles" class="particles" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="clock-block">
+      <span class="clock-mark">◷</span>
+      <div>
+        <small>KOLKATA · INDIA · IST</small>
+        <strong id="liveTime">--:--:--</strong>
+        <em id="liveDate">LOADING DATE</em>
+      </div>
+    </div>
+
+    <div class="brand-mini">
+      <span>PUJO EVENING</span>
+      <b>PUJO PLAYLIST</b>
+    </div>
+
+    <div class="top-actions">
+      <button id="moodPill" class="mood-pill" type="button">🪔 PUJO MOOD · AUTO</button>
+      <button id="ambientToggle" class="round-btn" type="button" title="Toggle ambience">☼</button>
+      <button id="muteToggle" class="round-btn" type="button" title="Mute player">🔊</button>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <button class="nav-link active" data-view="home" type="button">⌂ HOME</button>
+    <button class="nav-link" data-view="playlist-old" type="button">♫ OLD GOLD</button>
+    <button class="nav-link" data-view="playlist-new" type="button">♟ NEW DANCE</button>
+    <button class="nav-link" data-view="mahalaya" type="button">🔱 MAHALAYA</button>
+  </nav>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="view active">
+      <div class="home-shell">
+        <div class="eyebrow" id="timeGreeting">PUJO EVENING</div>
+        <div class="ornament"><i></i><span>✦</span><i></i></div>
+        <h1>PUJO <b>PLAYLIST</b></h1>
+        <p class="bengali-line" id="timeLine">পুজোর গান • পুজোর আমেজ • পুজোর গল্প</p>
+        <p class="english-line">A LIVING SOUNDTRACK FOR SHARODIYA</p>
+
+        <div class="hero-cards">
+          <button class="pujo-card old" data-open="playlist-old" type="button">
+            <span class="card-no">01</span>
+            <span class="card-symbol">🪔</span>
+            <small>THE CLASSICS</small>
+            <h2>OLD GOLD</h2>
+            <p>সেই পুরোনো পুজোর চেনা সুর।</p>
+            <span class="enter">ENTER <b>→</b></span>
+          </button>
+
+          <button class="pujo-card new" data-open="playlist-new" type="button">
+            <span class="card-no">02</span>
+            <span class="card-symbol">💃</span>
+            <small>THE NEW BEATS</small>
+            <h2>NEW DANCE</h2>
+            <h3>PUJO</h3>
+            <p>প্যান্ডেল থেকে dance floor.</p>
+            <span class="enter">ENTER <b>→</b></span>
+          </button>
+        </div>
+
+        <button class="mahalaya-card" data-open="mahalaya" type="button">
+          <span class="mahalaya-icon">🔱</span>
+          <span class="mahalaya-copy">
+            <small>THE DAWN OF DEVI PAKSHA</small>
+            <strong>MAHALAYA</strong>
+            <em>আসছে দেবীপক্ষ... Enter the dawn →</em>
+          </span>
+          <span class="mahalaya-arrow">↗</span>
+        </button>
+
+        <div class="home-bottom-grid">
+          <section class="countdown-card">
+            <div class="countdown-head">
+              <div>
+                <small id="countdownLabel">COUNTDOWN TO SHUBHO MAHALAYA</small>
+                <strong id="countdownTitle">10 OCTOBER 2026</strong>
+              </div>
+              <span class="tiny-trishul">🔱</span>
+            </div>
+            <div class="count-grid">
+              <span><b id="cdDays">--</b><small>DAYS</small></span>
+              <span><b id="cdHours">--</b><small>HRS</small></span>
+              <span><b id="cdMinutes">--</b><small>MIN</small></span>
+              <span><b id="cdSeconds">--</b><small>SEC</small></span>
+            </div>
+          </section>
+
+          <section class="quote-card">
+            <span>✿</span>
+            <p>“Pujo begins<br>with a song...”</p>
+            <small>শারদীয়ার সুরে</small>
+          </section>
+
+          <section class="countdown-card">
+            <div class="countdown-head">
+              <div>
+                <small>SHARODIYA 2026</small>
+                <strong>16 OCTOBER 2026</strong>
+              </div>
+              <span class="tiny-trishul">🪔</span>
+            </div>
+            <div class="count-grid">
+              <span><b id="pujoDays">--</b><small>DAYS</small></span>
+              <span><b id="pujoHours">--</b><small>HRS</small></span>
+              <span><b id="pujoMinutes">--</b><small>MIN</small></span>
+              <span><b id="pujoSeconds">--</b><small>SEC</small></span>
+            </div>
+          </section>
+        </div>
+
+        <div class="current-vibe">
+          <span>CURRENT VIBE</span>
+          <b id="vibeText">PUJO EVENING</b>
+          <div class="vibe-meter"><i id="vibeFill"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAYLIST -->
+    <section id="playlist-old" class="view playlist-view">
+      <button class="back-btn" data-open="home" type="button">← BACK TO PUJO</button>
+      <div class="playlist-hero">
+        <div class="playlist-title-wrap">
+          <span id="playlistBadge" class="badge">🪔 OG</span>
+          <h2 id="playlistTitle">OLD GOLD</h2>
+          <p id="playlistDesc">The timeless sounds of Durga Puja.</p>
+        </div>
+        <div class="playlist-tools">
+          <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search songs…" autocomplete="off"></label>
+          <button id="shuffleBtn" class="tool-btn" type="button">🔀</button>
+          <button id="repeatBtn" class="tool-btn" type="button">🔁</button>
+          <button id="playAllBtn" class="gold-btn compact" type="button">▶ PLAY ALL</button>
+        </div>
+      </div>
+
+      <div class="playlist-layout">
+        <section class="song-box">
+          <div class="song-box-head"><span>TRACKLIST</span><span id="songCount">0 SONGS</span></div>
+          <div id="songList"></div>
+        </section>
+
+        <aside class="player-card">
+          <div class="record" id="record"><span>🪔</span></div>
+          <small class="now-label">NOW PLAYING</small>
+          <h3 id="nowTitle">Choose a song</h3>
+          <p id="nowArtist">Your Pujo soundtrack awaits.</p>
+
+          <div class="progress-wrap">
+            <input id="seek" class="range" type="range" min="0" max="100" value="0" step="0.1">
+            <div class="times"><span id="elapsed">0:00</span><span id="total">0:00</span></div>
+          </div>
+
+          <div class="controls">
+            <button id="prevBtn" type="button">⏮</button>
+            <button id="bigPlay" class="big-play" type="button">▶</button>
+            <button id="nextBtn" type="button">⏭</button>
+          </div>
+
+          <div class="player-actions">
+            <button id="favoriteBtn" type="button">♡ Favorite</button>
+            <button id="queueBtn" type="button">＋ Queue</button>
+          </div>
+
+          <div class="volume"><span>🔊</span><input id="volume" type="range" min="0" max="1" step="0.01" value="0.9"></div>
+
+          <div class="up-next">
+            <small>UP NEXT</small>
+            <strong id="upNext">—</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- MAHALAYA -->
+    <section id="mahalaya" class="view mahalaya-view">
+      <button class="back-btn" data-open="home" type="button">← BACK TO PUJO</button>
+
+      <div class="mahalaya-hero">
+        <div class="mahalaya-art" aria-hidden="true">
+          <div class="dawn-sun"></div>
+          <div class="birds">⌁  ᐧ  ⌁</div>
+          <div class="durga-symbol">ॐ</div>
+          <div class="temple"></div>
+          <div class="kash-large"></div>
+        </div>
+
+        <div class="mahalaya-content">
+          <p class="eyebrow">10 OCTOBER 2026 · SHUBHO MAHALAYA</p>
+          <div class="ornament"><i></i><span>🔱</span><i></i></div>
+          <h2>MAHALAYA</h2>
+          <p class="mahalaya-bengali">আলোয় আলোয় ফিরে আসুক মা...</p>
+          <p class="mahalaya-copy-text">The quiet before the lights. The first sound of the dhaak. The morning that tells you Pujo is finally coming.</p>
+
+          <div class="mahalaya-actions">
+            <button id="dawnBtn" class="gold-btn" type="button">▶ BEGIN THE DAWN</button>
+            <button class="ghost-btn" data-open="playlist-old" type="button">EXPLORE PUJO PLAYLIST</button>
+          </div>
+        </div>
+
+        <div class="mahalaya-notes">
+          <article><span>🌅</span><strong>DAWN</strong><p>Soft morning light and a slow start.</p></article>
+          <article><span>🌾</span><strong>SHIULI & KASH</strong><p>Autumn in Bengal, translated into atmosphere.</p></article>
+          <article><span>🪔</span><strong>THE INVITATION</strong><p>Your own Mahalaya audio can be added later.</p></article>
+        </div>
+      </div>
+
+      <div class="mahalaya-lower">
+        <section class="mahalaya-playlist">
+          <div class="section-head">
+            <div><span class="badge">🔱 MAHALAYA</span><h3>MAHALAYA PLAYLIST</h3></div>
+            <button id="mahalayaPlayAll" class="gold-btn compact" type="button">▶ PLAY MAHALAYA</button>
+          </div>
+          <div id="mahalayaList"></div>
+        </section>
+
+        <aside class="side-stack">
+          <section class="side-card">
+            <small>MAHALAYA COUNTDOWN</small>
+            <strong id="mDays">--</strong><span>DAYS LEFT</span>
+            <hr>
+            <small>SHARODIYA 2026</small>
+            <strong id="sDays">--</strong><span>DAYS LEFT</span>
+          </section>
+
+          <section class="side-card ambience-card">
+            <small>MAHALAYA AMBIENCE</small>
+            <div class="ambience-orb">☼</div>
+            <strong>DAWN AMBIENCE</strong>
+            <input id="ambienceVolume" type="range" min="0" max="1" step="0.01" value="0.25">
+          </section>
+        </aside>
+      </div>
+
+      <div class="quote-banner">
+        <p>“মা দেবী সর্বভূতেষু শক্তিরূপেণ সংস্থিতা...”</p>
+        <small>মহালয়ার ভোর · দেবীপক্ষের আহ্বান</small>
+      </div>
+    </section>
+  </main>
+
+  <!-- MOOD PANEL -->
+  <div id="moodPanel" class="floating-panel">
+    <div class="panel-head"><span>PUJO MOOD</span><button id="closeMood" type="button">×</button></div>
+    <p>Let the clock control the atmosphere, or choose one yourself.</p>
+    <div class="mood-options">
+      <button data-mood="auto" type="button">◉ Auto</button>
+      <button data-mood="dawn" type="button">🌅 Dawn</button>
+      <button data-mood="day" type="button">☀️ Day</button>
+      <button data-mood="evening" type="button">🌇 Evening</button>
+      <button data-mood="night" type="button">🌙 Night</button>
+    </div>
+  </div>
+
+  <!-- FIXED PLAYER -->
+  <div id="miniPlayer" class="mini-player">
+    <div class="mini-song">
+      <div class="mini-art">🪔</div>
+      <div><strong id="miniTitle">Nothing playing</strong><small id="miniArtist">Choose a song</small></div>
+    </div>
+    <div class="mini-main">
+      <div class="mini-controls">
+        <button id="miniPrev" type="button">⏮</button>
+        <button id="miniPlay" class="mini-play" type="button">▶</button>
+        <button id="miniNext" type="button">⏭</button>
+      </div>
+      <input id="miniSeek" class="mini-seek" type="range" min="0" max="100" value="0" step="0.1">
+    </div>
+    <div class="mini-meta"><span id="miniElapsed">0:00</span><span>/</span><span id="miniTotal">0:00</span></div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <audio id="audio" preload="metadata"></audio>
+
+  <script src="./songs.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
