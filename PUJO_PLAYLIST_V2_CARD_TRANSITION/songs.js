@@ -105,7 +105,7 @@ const playlists = {
 
       blank("Dhaker Taley",
 "Bengali Song",
-"songs/new-dance/Dhaker-Taley-Lyrical-Dev-Subhashree-Jeet-Ganguly-Abhijeet-Parinita-Sudipto-SVF-Music.mp3"
+"songs/new-dance/Dhaker-Taley-Lyrical-Dev-Subhashree-Jeet-Gannguli-Abhijeet-Parinita-Sudipto-SVF-Music.mp3"
 ),
       blank("Bhojo Gourango",
       "Bengali Song",
@@ -131,7 +131,7 @@ const playlists = {
 
       blank("Mala Re",
 "Bengali Song",
-"songs/new-dance/Mala-Re-মালা-রে-Romeo-Dev-Subhashree-Jeet-Ganguly-Sujit-Mondol-SVF.mp3"
+"songs/new-dance/Mala-Re-মালা-রে-Romeo-Dev-Subhashree-Jeet-Gannguli-Sujit-Mondol-SVF.mp3"
 ),
       blank("Mon Mane Na",
       "Bengali Song",
