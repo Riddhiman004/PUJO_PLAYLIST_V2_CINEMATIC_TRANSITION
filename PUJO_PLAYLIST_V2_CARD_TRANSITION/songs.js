@@ -131,7 +131,7 @@ const playlists = {
 
       blank("Mala Re",
 "Bengali Song",
-"songs/new-dance/Mala Re-মালা-রে-Romeo-Dev-Subhashree-Jeet-Ganguly-Sujit-Mondol-SVF.mp3"
+"songs/new-dance/Mala-Re-মালা-রে-Romeo-Dev-Subhashree-Jeet-Ganguly-Sujit-Mondol-SVF.mp3"
 ),
       blank("Mon Mane Na",
       "Bengali Song",
