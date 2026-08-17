@@ -99,18 +99,18 @@ const playlists = {
     description: "Fresh beats for the modern Pujo.",
     tracks: [
       blank("Dhak Baja Kashor Baja",
-    "Traditional Pujo Beat",
-    "songs/new-dance/Dhak Baja Kashor Baja (Pendujatt.Com.Se).mp3"
+"Traditional Pujo Beat",
+"songs/new-dance/Dhak Baja Kashor Baja (PenduJatt.Com.Se).mp3"
   ),
 
       blank("Dhaker Taley",
-      "Bengali Song",
-      "songs/new-dance/Dhaker-Taley-Lyrical-Dev-Subhashree-Jeet-Ganguly-Abhijeet-Parinita-Sudipto-SVF-Music.mp3"
-    ),
+"Bengali Song",
+"songs/new-dance/Dhaker-Taley-Lyrical-Dev-Subhashree-Jeet-Ganguly-Abhijeet-Parinita-Sudipto-SVF-Music.mp3"
+),
       blank("Bhojo Gourango",
       "Bengali Song",
       "songs/new-dance/Bhojo Gourango (PenduJatt.Com.Se).mp3"
-    ),,
+    ),
       blank("Dhitang Dhitang",
       "Bengali Song",
       "songs/new-dance/Dhitang Dhitang (PenduJatt.Com.Se).mp3"
@@ -130,9 +130,9 @@ const playlists = {
     ),
 
       blank("Mala Re",
-      "Bengali Song",
-      "songs/new-dance/Mala Re-মালা-রে-Romeo-Dev-Subhashree-Jeet-Ganguly-Sujit-Mondol-SVF.mp3"
-    ),
+"Bengali Song",
+"songs/new-dance/Mala Re-মালা-রে-Romeo-Dev-Subhashree-Jeet-Ganguly-Sujit-Mondol-SVF.mp3"
+),
       blank("Mon Mane Na",
       "Bengali Song",
       "songs/new-dance/Mon Mane Na (PenduJatt.Com.Se).mp3"
