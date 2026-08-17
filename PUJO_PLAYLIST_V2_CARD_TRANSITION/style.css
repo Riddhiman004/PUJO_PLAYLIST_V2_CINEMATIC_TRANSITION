@@ -191,3 +191,57 @@ main{position:relative;z-index:2}
   .clock-block strong{font-size:17px}.clock-block small,.clock-block em{font-size:6px;letter-spacing:1px}.round-btn{width:32px;height:32px}
   .home-shell h1{font-size:64px}.home-shell{padding-left:14px;padding-right:14px}.pujo-card{min-height:170px}.playlist-hero,.playlist-layout,.mahalaya-hero,.mahalaya-lower,.quote-banner{width:calc(100% - 24px)}.back-btn{margin-left:12px}.playlist-tools .gold-btn{flex:1}.mahalaya-content{padding:42px 18px 18px}.mahalaya-content h2{font-size:64px}.side-stack{grid-template-columns:1fr}.song-row{grid-template-columns:30px 25px 1fr 30px}.song-details strong{font-size:12px}.mini-player{left:7px;right:7px;bottom:7px}
 }
+.sleep-timer-wrap {
+  position: relative;
+  margin: 12px 0;
+}
+
+.sleep-timer-btn {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(212, 169, 67, 0.35);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.sleep-timer-btn:hover {
+  border-color: rgba(212, 169, 67, 0.75);
+  transform: translateY(-1px);
+}
+
+.sleep-timer-menu {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.sleep-timer-menu.show {
+  display: grid;
+}
+
+.sleep-timer-menu button {
+  padding: 8px 5px;
+  border: 1px solid rgba(212, 169, 67, 0.25);
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.18);
+  color: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sleep-timer-menu button:hover {
+  background: rgba(212, 169, 67, 0.15);
+  border-color: rgba(212, 169, 67, 0.65);
+}
+
+@media (max-width: 600px) {
+  .sleep-timer-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -13,6 +13,7 @@ let ambienceCtx = null;
 let ambienceMaster = null;
 let ambienceTimers = [];
 let toastTimer = null;
+let sleepTimer = null;
 let moodMode = localStorage.getItem("pujoMoodMode") || "auto";
 
 const views = ["home","playlist-old","playlist-new","mahalaya"];
@@ -360,6 +361,17 @@ function bindPlayer(){
   $("miniNext").addEventListener("click",nextSong);
   $("favoriteBtn").addEventListener("click",()=>{if(currentIndex>=0)toggleFavorite(currentIndex,activePlaylistKey)});
   $("queueBtn").addEventListener("click",()=>{if(currentIndex<0)return showToast("Choose a song first.");queue.push(currentIndex);updateUpNext();showToast("Added to Up Next")});
+  $("sleepTimerBtn").addEventListener("click",()=>{
+  $("sleepTimerMenu").classList.toggle("show");
+});
+
+document.querySelectorAll("[data-sleep]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const minutes = Number(btn.dataset.sleep);
+    setSleepTimer(minutes);
+    $("sleepTimerMenu").classList.remove("show");
+  });
+});
 
   $("seek").addEventListener("input",e=>seekTo(e.target.value));
   $("miniSeek").addEventListener("input",e=>seekTo(e.target.value));
@@ -507,4 +519,24 @@ function safe(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 function showToast(text){
   $("toast").textContent=text;$("toast").classList.add("show");
   clearTimeout(toastTimer);toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2200);
+}
+function setSleepTimer(minutes){
+  if(sleepTimer){
+    clearTimeout(sleepTimer);
+    sleepTimer=null;
+  }
+
+  if(minutes===0){
+    showToast("Sleep Timer cancelled");
+    return;
+  }
+
+  showToast(`Sleep Timer set for ${minutes} minutes`);
+
+  sleepTimer=setTimeout(()=>{
+    audio.pause();
+    audio.currentTime=0;
+    sleepTimer=null;
+    showToast("Sleep Timer ended — playback stopped");
+  }, minutes*60*1000);
 }
