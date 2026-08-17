@@ -170,11 +170,11 @@ const playlists = {
     "songs/mahalaya/Bajlo-Tomar-Alor-Benu.mp3"
   ),
       blank("Aham Rudre", "Mahalaya", "songs/mahalaya/Aham-Rudre.mp3"),
-      blank("Durge Durge Durgatinashini", "Mahalaya", "songs/mahalaya/Durge Durge Durgatinashini (Pendujatt.Com.Se).mp3"),
-      blank("Jago Tumi Jago", "Mahalaya", "songs/mahalaya/Jago Tumi Jago (Pendujatt.Com.Se).mp3"),
+      blank("Durge Durge Durgatinashini", "Mahalaya", "songs/mahalaya/Durge-Durge-Durgatinashini.mp3"),
+      blank("Jago Tumi Jago", "Mahalaya", "songs/mahalaya/Jago-Tumi-Jago.mp3"),
       blank("Ogo Amar Agomoni", "Mahalaya", "songs/mahalaya/Ogo-Amar-Agomoni.mp3"),
-      blank("Rupang Dehi Jayang Dehi", "Mahalaya", "songs/mahalaya/Rupang Dehi Jayang Dehi (Pendujatt.Com.Se).mp3"),
-      blank("Ya Chandi", "Mahalaya", "songs/mahalaya/Ya Chandi (Pendujatt.Com.Se).mp3"),
+      blank("Rupang Dehi Jayang Dehi", "Mahalaya", "songs/mahalaya/Rupang-Dehi-Jayang-Dehi.mp3"),
+      blank("Ya Chandi", "Mahalaya", "songs/mahalaya/Ya-Chandi.mp3"),
       blank("Mahalaya Track 08", "Add artist", ""),
       blank("Mahalaya Track 09", "Add artist", ""),
       blank("Mahalaya Track 10", "Add artist", "")
