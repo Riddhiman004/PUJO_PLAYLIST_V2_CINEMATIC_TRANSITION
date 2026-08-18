@@ -617,7 +617,7 @@ main{position:relative;z-index:2}
   }
 }
 /* =========================================
-   10 CIRCULAR DIYA ORBIT
+   10 DIYA CIRCULAR ORBIT
    ========================================= */
 
 .orbit-diyas {
@@ -625,13 +625,16 @@ main{position:relative;z-index:2}
   left: 50%;
   top: 52%;
   width: min(78vw, 520px);
-  aspect-ratio: 1;
+  height: min(78vw, 520px);
   transform: translate(-50%, -50%);
   z-index: 0;
   pointer-events: none;
+
+  /* Main circular movement */
   animation: diyaOrbit 28s linear infinite;
 }
 
+/* Soft circular glow */
 .orbit-diyas::before {
   content: "";
   position: absolute;
@@ -643,96 +646,106 @@ main{position:relative;z-index:2}
     inset 0 0 30px rgba(220, 169, 67, 0.03);
 }
 
+/* Individual diya */
 .orbit-diya {
   position: absolute;
-  left: 50%;
-  top: 50%;
+
   width: 34px;
   height: 34px;
-  margin: -17px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 25px;
+
   filter:
-    drop-shadow(0 0 7px rgba(255, 193, 72, 0.75))
-    drop-shadow(0 0 18px rgba(220, 169, 67, 0.35));
+    drop-shadow(0 0 7px rgba(255, 193, 72, 0.85))
+    drop-shadow(0 0 18px rgba(220, 169, 67, 0.45));
+
+  /* Keeps diya upright */
   animation: diyaCounterRotate 28s linear infinite;
 }
 
-/* 10 diya positions — 36° apart */
 
+/* =========================================
+   10 DIYA POSITIONS
+   ========================================= */
+
+/* Top */
 .diya-1 {
-  transform:
-    rotate(0deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(0deg);
+  left: 50%;
+  top: 2%;
+  transform: translate(-50%, -50%);
 }
 
+/* Top-right */
 .diya-2 {
-  transform:
-    rotate(36deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-36deg);
+  left: 79%;
+  top: 9%;
+  transform: translate(-50%, -50%);
 }
 
+/* Right-top */
 .diya-3 {
-  transform:
-    rotate(72deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-72deg);
+  left: 96%;
+  top: 31%;
+  transform: translate(-50%, -50%);
 }
 
+/* Right-bottom */
 .diya-4 {
-  transform:
-    rotate(108deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-108deg);
+  left: 96%;
+  top: 69%;
+  transform: translate(-50%, -50%);
 }
 
+/* Bottom-right */
 .diya-5 {
-  transform:
-    rotate(144deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-144deg);
+  left: 79%;
+  top: 91%;
+  transform: translate(-50%, -50%);
 }
 
+/* Bottom */
 .diya-6 {
-  transform:
-    rotate(180deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-180deg);
+  left: 50%;
+  top: 98%;
+  transform: translate(-50%, -50%);
 }
 
+/* Bottom-left */
 .diya-7 {
-  transform:
-    rotate(216deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-216deg);
+  left: 21%;
+  top: 91%;
+  transform: translate(-50%, -50%);
 }
 
+/* Left-bottom */
 .diya-8 {
-  transform:
-    rotate(252deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-252deg);
+  left: 4%;
+  top: 69%;
+  transform: translate(-50%, -50%);
 }
 
+/* Left-top */
 .diya-9 {
-  transform:
-    rotate(288deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-288deg);
+  left: 4%;
+  top: 31%;
+  transform: translate(-50%, -50%);
 }
 
+/* Top-left */
 .diya-10 {
-  transform:
-    rotate(324deg)
-    translateY(calc(min(78vw, 520px) * -0.46))
-    rotate(-324deg);
+  left: 21%;
+  top: 9%;
+  transform: translate(-50%, -50%);
 }
 
-/* Main circular movement */
+
+/* =========================================
+   ORBIT ANIMATION
+   ========================================= */
 
 @keyframes diyaOrbit {
   from {
@@ -744,30 +757,34 @@ main{position:relative;z-index:2}
   }
 }
 
-/* Keeps the diya upright while orbiting */
 
+/* Keeps each diya facing normally */
 @keyframes diyaCounterRotate {
   from {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
 
   to {
-    transform: rotate(-360deg);
+    transform: translate(-50%, -50%) rotate(-360deg);
   }
 }
 
-/* Mobile */
+
+/* =========================================
+   MOBILE
+   ========================================= */
 
 @media (max-width: 600px) {
+
   .orbit-diyas {
     width: 82vw;
+    height: 82vw;
     top: 51%;
   }
 
   .orbit-diya {
     width: 30px;
     height: 30px;
-    margin: -15px;
     font-size: 21px;
   }
 }
