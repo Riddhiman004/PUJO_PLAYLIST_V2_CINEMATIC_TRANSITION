@@ -789,14 +789,14 @@ main{position:relative;z-index:2}
   }
 }
 /* =========================================
-   SMOOTH ENTER PUJO CINEMATIC TRANSITION
+   SMOOTH CINEMATIC ENTER PUJO TRANSITION
    ========================================= */
 
 body.pujo-entering {
   overflow: hidden;
 }
 
-/* Soft golden transition layer */
+/* Golden light expands smoothly across the screen */
 body.pujo-entering::after {
   content: "";
   position: fixed;
@@ -806,28 +806,30 @@ body.pujo-entering::after {
 
   background:
     radial-gradient(
-      circle at 50% 48%,
-      rgba(255, 205, 105, 0.28) 0%,
-      rgba(180, 120, 45, 0.12) 28%,
-      rgba(20, 7, 3, 0.65) 72%,
-      rgba(0, 0, 0, 0.92) 100%
+      circle at 50% 50%,
+      rgba(255, 220, 140, 0) 0%,
+      rgba(255, 205, 105, 0.10) 25%,
+      rgba(255, 185, 65, 0.22) 48%,
+      rgba(30, 8, 3, 0.60) 100%
     );
 
   opacity: 0;
+  transform: scale(0.82);
 
-  animation: smoothPujoLight 1.35s ease-in-out forwards;
+  animation: pujoGoldenReveal 1.4s cubic-bezier(.65, 0, .35, 1) forwards;
 }
 
 
 /* =========================================
-   INTRO EXIT
+   INTRO ZOOM + CINEMATIC DISSOLVE
    ========================================= */
 
 body.pujo-entering .intro-screen {
-  animation: smoothIntroExit 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation: pujoIntroExit 1.4s cubic-bezier(.65, 0, .35, 1) forwards;
+  transform-origin: center center;
 }
 
-@keyframes smoothIntroExit {
+@keyframes pujoIntroExit {
 
   0% {
     opacity: 1;
@@ -835,87 +837,111 @@ body.pujo-entering .intro-screen {
     filter: brightness(1);
   }
 
-  45% {
+  30% {
     opacity: 1;
-    transform: scale(1.015);
-    filter: brightness(1.12);
+    transform: scale(1.018);
+    filter: brightness(1.04);
+  }
+
+  55% {
+    opacity: 0.96;
+    transform: scale(1.045);
+    filter: brightness(1.10);
   }
 
   75% {
-    opacity: 0.65;
-    transform: scale(1.035);
-    filter: brightness(1.25);
+    opacity: 0.72;
+    transform: scale(1.085);
+    filter: brightness(1.18);
+  }
+
+  90% {
+    opacity: 0.32;
+    transform: scale(1.12);
+    filter: brightness(1.28);
   }
 
   100% {
     opacity: 0;
-    transform: scale(1.055);
-    filter: brightness(1.4);
+    transform: scale(1.15);
+    filter: brightness(1.38);
     visibility: hidden;
   }
 }
 
 
 /* =========================================
-   GOLDEN LIGHT FLOW
+   GOLDEN LIGHT EXPANSION
    ========================================= */
 
-@keyframes smoothPujoLight {
+@keyframes pujoGoldenReveal {
 
   0% {
     opacity: 0;
+    transform: scale(0.82);
   }
 
-  35% {
-    opacity: 0.18;
+  25% {
+    opacity: 0.08;
+    transform: scale(0.90);
   }
 
-  60% {
-    opacity: 0.38;
+  50% {
+    opacity: 0.24;
+    transform: scale(1.05);
   }
 
-  78% {
-    opacity: 0.18;
+  70% {
+    opacity: 0.20;
+    transform: scale(1.18);
+  }
+
+  85% {
+    opacity: 0.08;
+    transform: scale(1.32);
   }
 
   100% {
     opacity: 0;
+    transform: scale(1.48);
   }
 }
 
 
 /* =========================================
-   DIYA GLOW ONLY
-   DON'T CHANGE ORBIT SPEED
+   DIYAS GLOW DURING TRANSITION
    ========================================= */
 
 body.pujo-entering .orbit-diya {
   filter:
-    drop-shadow(0 0 8px rgba(255, 193, 72, 0.9))
-    drop-shadow(0 0 18px rgba(255, 183, 50, 0.45));
-
-  animation:
-    diyaCounterRotate 28s linear infinite,
-    diyaTransitionGlow 1.1s ease-in-out;
+    drop-shadow(0 0 7px rgba(255, 190, 65, 0.95))
+    drop-shadow(0 0 18px rgba(255, 170, 45, 0.55));
 }
 
-@keyframes diyaTransitionGlow {
+
+/* =========================================
+   CENTER CONTENT LIGHT
+   ========================================= */
+
+body.pujo-entering .intro-content {
+  animation: pujoContentGlow 1.4s ease-out forwards;
+}
+
+@keyframes pujoContentGlow {
 
   0% {
-    filter:
-      drop-shadow(0 0 7px rgba(255, 193, 72, 0.85))
-      drop-shadow(0 0 18px rgba(220, 169, 67, 0.45));
+    filter: brightness(1);
   }
 
-  50% {
-    filter:
-      drop-shadow(0 0 13px rgba(255, 210, 100, 1))
-      drop-shadow(0 0 30px rgba(255, 183, 50, 0.75));
+  45% {
+    filter: brightness(1.08);
+  }
+
+  70% {
+    filter: brightness(1.20);
   }
 
   100% {
-    filter:
-      drop-shadow(0 0 7px rgba(255, 193, 72, 0.85))
-      drop-shadow(0 0 18px rgba(220, 169, 67, 0.45));
+    filter: brightness(1.35);
   }
 }
