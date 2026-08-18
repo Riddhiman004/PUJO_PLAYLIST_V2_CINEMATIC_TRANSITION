@@ -245,3 +245,374 @@ main{position:relative;z-index:2}
     grid-template-columns: repeat(2, 1fr);
   }
 }
+/* =========================================
+   FIRST VISIT PUJO INTRO
+   ========================================= */
+
+.pujo-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(92, 25, 8, 0.42), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(220, 169, 67, 0.08), transparent 45%),
+    #090302;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.pujo-intro.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 3;
+  width: min(90%, 700px);
+  text-align: center;
+  animation: introContentIn 1.4s ease both;
+}
+
+.intro-diya {
+  font-size: 30px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 18px rgba(220, 169, 67, 0.65));
+  animation: diyaFloat 3s ease-in-out infinite;
+}
+
+.intro-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--gold);
+  margin-bottom: 18px;
+  opacity: 0.8;
+}
+
+.intro-ornament i {
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    transparent
+  );
+}
+
+.intro-ornament span {
+  font-size: 16px;
+}
+
+.intro-eyebrow {
+  font-size: 8px;
+  letter-spacing: 5px;
+  color: #a98d69;
+  margin-bottom: 16px;
+}
+
+.intro-content h1 {
+  margin: 0;
+  font: 700 clamp(48px, 9vw, 88px)/0.9 "Playfair Display", serif;
+  letter-spacing: -2px;
+  color: #f4e5c7;
+  text-shadow: 0 10px 45px rgba(0, 0, 0, 0.7);
+}
+
+.intro-content h1 b {
+  display: block;
+  color: var(--gold);
+  font-size: 0.72em;
+  letter-spacing: 3px;
+  margin-top: 12px;
+}
+
+.intro-subtitle {
+  margin: 20px 0 30px;
+  color: #c7b19a;
+  font: italic 16px "Playfair Display", serif;
+  letter-spacing: 0.4px;
+}
+
+.enter-pujo-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  min-width: 190px;
+  padding: 13px 22px;
+  border: 1px solid rgba(220, 169, 67, 0.65);
+  border-radius: 999px;
+  background: rgba(220, 169, 67, 0.08);
+  color: #ecd092;
+  font-size: 9px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 30px rgba(220, 169, 67, 0.08);
+  transition: 0.35s ease;
+}
+
+.enter-pujo-btn b {
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.enter-pujo-btn:hover {
+  transform: translateY(-3px);
+  border-color: #f0ca70;
+  background: rgba(220, 169, 67, 0.15);
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.35),
+    0 0 35px rgba(220, 169, 67, 0.18);
+}
+
+.enter-pujo-btn:active {
+  transform: scale(0.97);
+}
+
+.intro-footer {
+  display: block;
+  margin-top: 34px;
+  color: #655447;
+  font-size: 6px;
+  letter-spacing: 3px;
+}
+
+/* Subtle Durga silhouette */
+
+.intro-durga {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 330px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.11;
+  filter: blur(0.2px);
+  pointer-events: none;
+}
+
+.durga-head {
+  position: absolute;
+  left: 50%;
+  top: 38px;
+  width: 42px;
+  height: 48px;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 45% 45%;
+  background: #e0a94c;
+  box-shadow: 0 0 35px rgba(220, 169, 67, 0.45);
+}
+
+.durga-crown {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: 58px;
+  height: 50px;
+  transform: translateX(-50%);
+  clip-path: polygon(
+    50% 0%,
+    62% 35%,
+    82% 10%,
+    78% 55%,
+    100% 38%,
+    76% 100%,
+    24% 100%,
+    0% 38%,
+    22% 55%,
+    18% 10%,
+    38% 35%
+  );
+  background: #dca943;
+}
+
+.durga-body {
+  position: absolute;
+  left: 50%;
+  top: 82px;
+  width: 100px;
+  height: 165px;
+  transform: translateX(-50%);
+  border-radius: 48% 48% 20% 20%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #dca943 25%,
+    #e8c56f 50%,
+    #dca943 75%,
+    transparent 100%
+  );
+}
+
+.durga-arm {
+  position: absolute;
+  top: 98px;
+  width: 125px;
+  height: 9px;
+  border-radius: 999px;
+  background: #dca943;
+  transform-origin: center;
+}
+
+.durga-arm-left {
+  left: 20px;
+  transform: rotate(-25deg);
+}
+
+.durga-arm-right {
+  right: 20px;
+  transform: rotate(25deg);
+}
+
+.durga-trident {
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  width: 4px;
+  height: 250px;
+  transform: translateX(-50%);
+  background: #dca943;
+  box-shadow: 0 0 15px rgba(220, 169, 67, 0.3);
+}
+
+.durga-trident::before,
+.durga-trident::after {
+  content: "";
+  position: absolute;
+  top: -15px;
+  width: 4px;
+  height: 42px;
+  background: #dca943;
+}
+
+.durga-trident::before {
+  left: -14px;
+  transform: rotate(-20deg);
+}
+
+.durga-trident::after {
+  right: -14px;
+  transform: rotate(20deg);
+}
+
+/* Intro particles */
+
+.intro-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.intro-particles span {
+  position: absolute;
+  color: #e8c56f;
+  opacity: 0;
+  animation: introParticle 6s ease-in-out infinite;
+}
+
+.intro-particles span:nth-child(1) { left: 14%; top: 22%; animation-delay: 0s; }
+.intro-particles span:nth-child(2) { left: 82%; top: 18%; animation-delay: 1s; }
+.intro-particles span:nth-child(3) { left: 24%; top: 72%; animation-delay: 2s; }
+.intro-particles span:nth-child(4) { left: 76%; top: 70%; animation-delay: 3s; }
+.intro-particles span:nth-child(5) { left: 9%; top: 48%; animation-delay: 4s; }
+.intro-particles span:nth-child(6) { left: 91%; top: 43%; animation-delay: 1.5s; }
+.intro-particles span:nth-child(7) { left: 34%; top: 16%; animation-delay: 2.5s; }
+.intro-particles span:nth-child(8) { left: 66%; top: 24%; animation-delay: 3.5s; }
+.intro-particles span:nth-child(9) { left: 18%; top: 86%; animation-delay: 4.5s; }
+.intro-particles span:nth-child(10) { left: 84%; top: 84%; animation-delay: 5s; }
+
+.intro-glow {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.12;
+  background: #dca943;
+}
+
+.intro-glow-left {
+  left: -120px;
+  bottom: -100px;
+}
+
+.intro-glow-right {
+  right: -120px;
+  top: -100px;
+}
+
+@keyframes introContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes diyaFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes introParticle {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.8);
+  }
+  35%, 65% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-18px) scale(1.15);
+  }
+}
+
+@media (max-width: 600px) {
+  .intro-content {
+    width: 92%;
+  }
+
+  .intro-content h1 {
+    font-size: 52px;
+  }
+
+  .intro-subtitle {
+    font-size: 14px;
+    margin-bottom: 26px;
+  }
+
+  .intro-durga {
+    width: 280px;
+    height: 270px;
+  }
+
+  .intro-eyebrow {
+    font-size: 7px;
+    letter-spacing: 3px;
+  }
+
+  .enter-pujo-btn {
+    min-width: 175px;
+  }
+}

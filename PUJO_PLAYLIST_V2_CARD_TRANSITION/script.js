@@ -23,6 +23,7 @@ function istNow(){
 }
 
 function init(){
+  initPujoIntro();
   makeParticles();
   bindNavigation();
   bindPlayer();
@@ -539,4 +540,27 @@ function setSleepTimer(minutes){
     sleepTimer=null;
     showToast("Sleep Timer ended — playback stopped");
   }, minutes*60*1000);
+}
+function initPujoIntro(){
+  const intro = document.getElementById("pujoIntro");
+  const enterBtn = document.getElementById("enterPujoBtn");
+
+  if(!intro || !enterBtn) return;
+
+  const alreadyEntered = localStorage.getItem("pujoIntroSeen");
+
+  if(alreadyEntered === "yes"){
+    intro.classList.add("hidden");
+    return;
+  }
+
+  enterBtn.addEventListener("click",()=>{
+    localStorage.setItem("pujoIntroSeen","yes");
+
+    intro.classList.add("hidden");
+
+    setTimeout(()=>{
+      intro.remove();
+    },1000);
+  });
 }
