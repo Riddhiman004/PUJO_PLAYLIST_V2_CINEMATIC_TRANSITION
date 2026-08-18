@@ -547,16 +547,8 @@ function initPujoIntro(){
 
   if(!intro || !enterBtn) return;
 
-  const alreadyEntered = localStorage.getItem("pujoIntroSeen");
-
-  if(alreadyEntered === "yes"){
-    intro.classList.add("hidden");
-    return;
-  }
-
+  // Intro will appear every time the website is opened or refreshed.
   enterBtn.addEventListener("click",()=>{
-    localStorage.setItem("pujoIntroSeen","yes");
-
     intro.classList.add("hidden");
 
     setTimeout(()=>{

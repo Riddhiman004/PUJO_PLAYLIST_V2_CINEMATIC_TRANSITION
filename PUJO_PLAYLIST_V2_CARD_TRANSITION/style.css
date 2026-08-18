@@ -616,3 +616,158 @@ main{position:relative;z-index:2}
     min-width: 175px;
   }
 }
+/* =========================================
+   10 CIRCULAR DIYA ORBIT
+   ========================================= */
+
+.orbit-diyas {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: min(78vw, 520px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  animation: diyaOrbit 28s linear infinite;
+}
+
+.orbit-diyas::before {
+  content: "";
+  position: absolute;
+  inset: 4%;
+  border: 1px solid rgba(220, 169, 67, 0.10);
+  border-radius: 50%;
+  box-shadow:
+    0 0 30px rgba(220, 169, 67, 0.05),
+    inset 0 0 30px rgba(220, 169, 67, 0.03);
+}
+
+.orbit-diya {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  margin: -17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  filter:
+    drop-shadow(0 0 7px rgba(255, 193, 72, 0.75))
+    drop-shadow(0 0 18px rgba(220, 169, 67, 0.35));
+  animation: diyaCounterRotate 28s linear infinite;
+}
+
+/* 10 diya positions — 36° apart */
+
+.diya-1 {
+  transform:
+    rotate(0deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(0deg);
+}
+
+.diya-2 {
+  transform:
+    rotate(36deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-36deg);
+}
+
+.diya-3 {
+  transform:
+    rotate(72deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-72deg);
+}
+
+.diya-4 {
+  transform:
+    rotate(108deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-108deg);
+}
+
+.diya-5 {
+  transform:
+    rotate(144deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-144deg);
+}
+
+.diya-6 {
+  transform:
+    rotate(180deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-180deg);
+}
+
+.diya-7 {
+  transform:
+    rotate(216deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-216deg);
+}
+
+.diya-8 {
+  transform:
+    rotate(252deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-252deg);
+}
+
+.diya-9 {
+  transform:
+    rotate(288deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-288deg);
+}
+
+.diya-10 {
+  transform:
+    rotate(324deg)
+    translateY(calc(min(78vw, 520px) * -0.46))
+    rotate(-324deg);
+}
+
+/* Main circular movement */
+
+@keyframes diyaOrbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Keeps the diya upright while orbiting */
+
+@keyframes diyaCounterRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .orbit-diyas {
+    width: 82vw;
+    top: 51%;
+  }
+
+  .orbit-diya {
+    width: 30px;
+    height: 30px;
+    margin: -15px;
+    font-size: 21px;
+  }
+}
