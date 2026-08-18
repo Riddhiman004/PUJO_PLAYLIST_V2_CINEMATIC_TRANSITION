@@ -28,6 +28,7 @@ function init(){
   bindNavigation();
   bindPlayer();
   bindMoodPanel();
+  setupPujoIntroTransition();
   updateClock();
   updateCountdowns();
   applyMood();
@@ -44,6 +45,31 @@ function init(){
   }
 }
 document.addEventListener("DOMContentLoaded",init);
+/* =========================================
+   ENTER PUJO CINEMATIC TRANSITION
+   ========================================= */
+
+function setupPujoIntroTransition() {
+  const buttons = document.querySelectorAll("button, a");
+
+  buttons.forEach(btn => {
+    const text = btn.textContent.trim().toUpperCase();
+
+    if (text.includes("ENTER PUJO")) {
+      btn.addEventListener("click", () => {
+
+        if (document.body.classList.contains("pujo-entering")) return;
+
+        document.body.classList.add("pujo-entering");
+
+        setTimeout(() => {
+          document.body.classList.remove("pujo-entering");
+        }, 1400);
+
+      });
+    }
+  });
+}
 
 function bindNavigation(){
   // Home cards get a cinematic open animation before the playlist appears.

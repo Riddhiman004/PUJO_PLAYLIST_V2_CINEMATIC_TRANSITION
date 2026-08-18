@@ -788,3 +788,95 @@ main{position:relative;z-index:2}
     font-size: 21px;
   }
 }
+/* =========================================
+   ENTER PUJO CINEMATIC TRANSITION
+   ========================================= */
+
+body.pujo-entering {
+  overflow: hidden;
+}
+
+/* Golden light burst */
+body.pujo-entering::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 213, 115, 0.85) 0%,
+      rgba(220, 169, 67, 0.35) 18%,
+      rgba(40, 15, 5, 0.7) 48%,
+      rgba(0, 0, 0, 1) 100%
+    );
+
+  opacity: 0;
+  transform: scale(0.2);
+}
+
+body.pujo-entering::after {
+  animation: pujoLightBurst 1.25s ease-in-out forwards;
+}
+
+@keyframes pujoLightBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  35% {
+    opacity: 0.9;
+    transform: scale(0.75);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(3);
+  }
+}
+
+/* Intro itself moves forward before disappearing */
+body.pujo-entering .intro-screen {
+  animation: introPujoExit 1.15s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes introPujoExit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  45% {
+    opacity: 1;
+    transform: scale(1.04);
+    filter: brightness(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+    filter: brightness(2.5);
+    visibility: hidden;
+  }
+}
+
+/* Make the diya orbit speed up during transition */
+body.pujo-entering .orbit-diyas {
+  animation-duration: 3s;
+}
+
+/* Make the diyas glow stronger */
+body.pujo-entering .orbit-diya {
+  filter:
+    drop-shadow(0 0 10px rgba(255, 193, 72, 1))
+    drop-shadow(0 0 28px rgba(255, 183, 50, 0.8));
+}
