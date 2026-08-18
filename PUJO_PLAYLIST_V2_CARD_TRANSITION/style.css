@@ -7,22 +7,71 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;min-height:100vh;color:var(--cream);background:#0a0302;
-  font-family:"DM Sans",Arial,sans-serif;overflow-x:hidden;transition:background 1.2s ease,color .6s;
+  font-family:"DM Sans",Arial,sans-serif;overflow-x:hidden;transition:background 1.8s ease,color .6s;
 }
-body.dawn{--accent:#3d5462;--accent2:#8d5620}
-body.day{--accent:#6e2d12;--accent2:#3a140b}
-body.evening{--accent:#7d2b12;--accent2:#260713}
-body.night{--accent:#32154a;--accent2:#0a020b}
+body.dawn{
+  --accent:#3d5462;
+  --accent2:#8d5620;
+  --mood-bg:#18242b;
+  --mood-glow:rgba(190,170,120,.16);
+}
+
+body.day{
+  --accent:#e6d12a;
+  --accent2:#3a410b;
+  --mood-bg:#33291d;
+  --mood-glow:rgba(255,215,130,.20);
+}
+
+body.evening{
+  --accent:#7d2b12;
+  --accent2:#260713;
+  --mood-bg:#1d0b08;
+  --mood-glow:rgba(225,120,45,.22);
+}
+
+body.night{
+  --accent:#32154a;
+  --accent2:#0a020b;
+  --mood-bg:#08050d;
+  --mood-glow:rgba(110,70,150,.18);
+}
 button,input{font:inherit}
 button{cursor:pointer}
 button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
-.ambient-backdrop{position:fixed;inset:0;z-index:-4;overflow:hidden;background:
-  radial-gradient(circle at 50% 14%,rgba(221,166,69,.13),transparent 27%),
-  linear-gradient(160deg,#160604 0%,#090203 75%)}
-.ambient-backdrop:before{content:"";position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(9,2,2,.72),transparent 35%,transparent 65%,rgba(8,2,2,.8)),
-  radial-gradient(circle at 50% 70%,rgba(139,56,17,.16),transparent 42%)}
+.ambient-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:-4;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 50% 64%,
+      var(--mood-glow),
+      transparent 32%
+    ),
+    linear-gradient(
+      160deg,
+      var(--mood-bg) 0%,
+      #090203 78%
+    );
+  transition:background 1.8s ease;
+}
+
+.ambient-backdrop::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at 50% 55%,
+      var(--mood-glow),
+      transparent 45%
+    );
+  opacity:.8;
+  transition:background 1.8s ease;
+}
 .glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.22;transition:background 1.5s}
 .glow-a{width:42vw;height:42vw;left:-15vw;top:10vh;background:var(--accent)}
 .glow-b{width:34vw;height:34vw;right:-12vw;bottom:-12vw;background:var(--accent2)}
