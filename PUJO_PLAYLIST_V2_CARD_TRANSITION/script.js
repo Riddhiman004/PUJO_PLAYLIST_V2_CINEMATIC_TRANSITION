@@ -497,12 +497,12 @@ function startAmbience(){
   stopAmbience(false);
 
   ambienceMaster=ambienceCtx.createGain();
-  ambienceMaster.gain.value=Number($("ambienceVolume").value)*0.07;
+  ambienceMaster.gain.value=Number($("ambienceVolume").value)*0.35;
   ambienceMaster.connect(ambienceCtx.destination);
 
   const drone=ambienceCtx.createOscillator();
   const droneGain=ambienceCtx.createGain();
-  drone.type="sine";drone.frequency.value=196;droneGain.gain.value=.12;
+  drone.type="sine";drone.frequency.value=196;droneGain.gain.value=.3;
   drone.connect(droneGain).connect(ambienceMaster);drone.start();
 
   const lfo=ambienceCtx.createOscillator();
