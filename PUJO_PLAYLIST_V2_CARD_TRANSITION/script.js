@@ -492,78 +492,52 @@ function toggleAmbience(){
   ambienceOn?stopAmbience():startAmbience();
 }
 function startAmbience(){
-  ambienceCtx ||= new (window.AudioContext||window.webkitAudioContext)();
-  if(ambienceCtx.state==="suspended") ambienceCtx.resume();
-  stopAmbience(false);
+  const ambienceAudio = new Audio(
+    "songs/ambience/mythologychallengeryt-durga-puja-dhak-sound-9330.mp3"
+  );
 
-  ambienceMaster=ambienceCtx.createGain();
+  ambienceAudio.loop = true;
+  ambienceAudio.volume = Number($("ambienceVolume").value);
 
-  // Louder and clearer ambience
-  ambienceMaster.gain.value=Number($("ambienceVolume").value)*0.8;
-  ambienceMaster.connect(ambienceCtx.destination);
+  ambienceAudio.play().then(()=>{
+    ambienceOn = true;
 
-  // Main soft drone
-  const drone=ambienceCtx.createOscillator();
-  const droneGain=ambienceCtx.createGain();
+    $("ambientToggle").textContent = "☀";
+    $("dawnBtn").textContent = "■ END THE DAWN";
 
-  drone.type="sine";
-  drone.frequency.value=196;
-  droneGain.gain.value=.45;
+    showToast("Pujo ambience ON");
+  }).catch(err=>{
+    console.error("Ambience audio could not play:", err);
+    showToast("Ambience could not start");
+  });
 
-  drone.connect(droneGain).connect(ambienceMaster);
-  drone.start();
-
-  // Slow movement in the drone
-  const lfo=ambienceCtx.createOscillator();
-  const lfoGain=ambienceCtx.createGain();
-
-  lfo.frequency.value=.08;
-  lfoGain.gain.value=.12;
-
-  lfo.connect(lfoGain).connect(droneGain.gain);
-  lfo.start();
-
-  // Soft bell/chime
-  const chime=ambienceCtx.createOscillator();
-  const chimeGain=ambienceCtx.createGain();
-
-  chime.type="triangle";
-  chime.frequency.value=392;
-  chimeGain.gain.value=.0001;
-
-  chime.connect(chimeGain).connect(ambienceMaster);
-  chime.start();
-
-  const timer=setInterval(()=>{
-    const now=ambienceCtx.currentTime;
-
-    chimeGain.gain.cancelScheduledValues(now);
-    chimeGain.gain.setValueAtTime(.0001,now);
-
-    chimeGain.gain.exponentialRampToValueAtTime(.18,now+.03);
-    chimeGain.gain.exponentialRampToValueAtTime(.0001,now+1.8);
-  },5000);
-
-  ambienceTimers=[timer,drone,lfo,chime];
-  ambienceOn=true;
-
-  $("ambientToggle").textContent="☀";
-  $("dawnBtn").textContent="■ END THE DAWN";
-
-  showToast("Dawn ambience ON");
+  ambienceTimers = [ambienceAudio];
+  window.ambienceAudio = ambienceAudio;
 }
+
 function stopAmbience(show=true){
-  ambienceTimers.forEach(x=>{if(typeof x==="number")clearInterval(x);else try{x.stop()}catch{}});
-  ambienceTimers=[];ambienceOn=false;
-  try{ambienceMaster?.disconnect()}catch{}
-  ambienceMaster=null;
-  $("ambientToggle").textContent="☼";
-  $("dawnBtn").textContent="▶ BEGIN THE DAWN";
-  if(show)showToast("Ambience OFF");
+  if(window.ambienceAudio){
+    window.ambienceAudio.pause();
+    window.ambienceAudio.currentTime = 0;
+    window.ambienceAudio = null;
+  }
+
+  ambienceTimers = [];
+  ambienceOn = false;
+
+  $("ambientToggle").textContent = "☼";
+  $("dawnBtn").textContent = "▶ BEGIN THE DAWN";
+
+  if(show) showToast("Ambience OFF");
 }
 $("ambientToggle").addEventListener("click",toggleAmbience);
 $("dawnBtn").addEventListener("click",toggleAmbience);
-$("ambienceVolume").addEventListener("input",e=>{if(ambienceMaster)ambienceMaster.gain.value=Number(e.target.value)*.07});
+
+$("ambienceVolume").addEventListener("input",e=>{
+  if(window.ambienceAudio){
+    window.ambienceAudio.volume = Number(e.target.value);
+  }
+});
 
 function safe(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 function showToast(text){
