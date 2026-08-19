@@ -493,40 +493,63 @@ function toggleAmbience(){
 }
 function startAmbience(){
   ambienceCtx ||= new (window.AudioContext||window.webkitAudioContext)();
-  if(ambienceCtx.state==="suspended")ambienceCtx.resume();
+  if(ambienceCtx.state==="suspended") ambienceCtx.resume();
   stopAmbience(false);
 
   ambienceMaster=ambienceCtx.createGain();
-  ambienceMaster.gain.value=Number($("ambienceVolume").value)*0.35;
+
+  // Louder and clearer ambience
+  ambienceMaster.gain.value=Number($("ambienceVolume").value)*0.8;
   ambienceMaster.connect(ambienceCtx.destination);
 
+  // Main soft drone
   const drone=ambienceCtx.createOscillator();
   const droneGain=ambienceCtx.createGain();
-  drone.type="sine";drone.frequency.value=196;droneGain.gain.value=.3;
-  drone.connect(droneGain).connect(ambienceMaster);drone.start();
 
+  drone.type="sine";
+  drone.frequency.value=196;
+  droneGain.gain.value=.45;
+
+  drone.connect(droneGain).connect(ambienceMaster);
+  drone.start();
+
+  // Slow movement in the drone
   const lfo=ambienceCtx.createOscillator();
   const lfoGain=ambienceCtx.createGain();
-  lfo.frequency.value=.08;lfoGain.gain.value=.08;
-  lfo.connect(lfoGain).connect(droneGain.gain);lfo.start();
 
+  lfo.frequency.value=.08;
+  lfoGain.gain.value=.12;
+
+  lfo.connect(lfoGain).connect(droneGain.gain);
+  lfo.start();
+
+  // Soft bell/chime
   const chime=ambienceCtx.createOscillator();
   const chimeGain=ambienceCtx.createGain();
-  chime.type="triangle";chime.frequency.value=392;chimeGain.gain.value=0;
-  chime.connect(chimeGain).connect(ambienceMaster);chime.start();
+
+  chime.type="triangle";
+  chime.frequency.value=392;
+  chimeGain.gain.value=.0001;
+
+  chime.connect(chimeGain).connect(ambienceMaster);
+  chime.start();
 
   const timer=setInterval(()=>{
     const now=ambienceCtx.currentTime;
+
     chimeGain.gain.cancelScheduledValues(now);
     chimeGain.gain.setValueAtTime(.0001,now);
-    chimeGain.gain.exponentialRampToValueAtTime(.08,now+.03);
-    chimeGain.gain.exponentialRampToValueAtTime(.0001,now+1.5);
-  },6500);
+
+    chimeGain.gain.exponentialRampToValueAtTime(.18,now+.03);
+    chimeGain.gain.exponentialRampToValueAtTime(.0001,now+1.8);
+  },5000);
 
   ambienceTimers=[timer,drone,lfo,chime];
   ambienceOn=true;
+
   $("ambientToggle").textContent="☀";
   $("dawnBtn").textContent="■ END THE DAWN";
+
   showToast("Dawn ambience ON");
 }
 function stopAmbience(show=true){
