@@ -1046,15 +1046,21 @@ body.pujo-entering .intro-content {
 
 /* 10 orbit diyas */
 
+/* 10 orbit diyas start completely hidden */
 #pujoIntro.cinematic-ready .orbit-diya {
-  opacity: 0;
+  opacity: 0 !important;
+  visibility: hidden;
+
   transition:
-    opacity .55s ease,
-    filter .7s ease;
+    opacity .28s ease,
+    filter .28s ease;
 }
 
-#pujoIntro .orbit-diya.cine-lit {
-  opacity: 1;
+
+/* JS reveals each diya one by one */
+#pujoIntro.cinematic-ready .orbit-diya.cine-lit {
+  opacity: 1 !important;
+  visibility: visible;
 
   filter:
     drop-shadow(0 0 8px rgba(255,190,70,.9))

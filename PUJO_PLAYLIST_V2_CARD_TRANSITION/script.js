@@ -555,7 +555,7 @@ function setSleepTimer(minutes){
     return;
   }
 
-  showToast(`Sleep Timer set for ${minutes} minutes`);
+   showToast(`Sleep Timer set for ${minutes} minutes`);
 
   sleepTimer=setTimeout(()=>{
     audio.pause();
@@ -595,40 +595,40 @@ function runPujoCinematicIntro() {
 
   // 2. 10 diyas — one by one
   orbitDiyas.forEach((diya, index) => {
-    setTimeout(() => {
-      diya.classList.add("cine-lit");
-    }, 1100 + index * 140);
-  });
-
-  // 3. Ornament
   setTimeout(() => {
-    ornament?.classList.add("cine-show");
-  }, 2500);
+    diya.classList.add("cine-lit");
+  }, 1500 + index * 400);
+});
 
-  // 4. Small heading
-  setTimeout(() => {
-    eyebrow?.classList.add("cine-show");
-  }, 2750);
+ // 3. Ornament
+setTimeout(() => {
+  ornament?.classList.add("cine-show");
+}, 5400);
 
-  // 5. SHUBHO SHARODIYA
-  setTimeout(() => {
-    title?.classList.add("cine-show");
-  }, 3050);
+// 4. Small heading
+setTimeout(() => {
+  eyebrow?.classList.add("cine-show");
+}, 5700);
 
-  // 6. Bengali subtitle
-  setTimeout(() => {
-    subtitle?.classList.add("cine-show");
-  }, 3400);
+// 5. SHUBHO SHARODIYA
+setTimeout(() => {
+  title?.classList.add("cine-show");
+}, 6000);
 
-  // 7. ENTER PUJO
-  setTimeout(() => {
-    enterBtn?.classList.add("cine-show");
-  }, 3800);
+// 6. Bengali subtitle
+setTimeout(() => {
+  subtitle?.classList.add("cine-show");
+}, 6400);
 
-  // 8. Footer
-  setTimeout(() => {
-    footer?.classList.add("cine-show");
-  }, 4100);
+// 7. ENTER PUJO
+setTimeout(() => {
+  enterBtn?.classList.add("cine-show");
+}, 6800);
+
+// 8. Footer
+setTimeout(() => {
+  footer?.classList.add("cine-show");
+}, 7100);
 }
 function initPujoIntro(){
   const intro = document.getElementById("pujoIntro");
