@@ -1139,9 +1139,6 @@ body.pujo-entering .intro-content {
 
   pointer-events: none;
 }
-/* FIX: hide old Durga figure from cinematic intro */
 #pujoIntro .intro-durga {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+  display: none !important;
 }
