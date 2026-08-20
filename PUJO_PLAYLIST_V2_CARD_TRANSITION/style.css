@@ -672,15 +672,17 @@ main{position:relative;z-index:2}
 .orbit-diyas {
   position: absolute;
   left: 50%;
-  top: 52%;
-  width: min(78vw, 520px);
-  height: min(78vw, 520px);
+  top: 50%;
+
+  width: 360px;
+  height: 360px;
+
   transform: translate(-50%, -50%);
   z-index: 0;
   pointer-events: none;
 
-  /* Main circular movement */
-  animation: diyaOrbit 28s linear infinite;
+  /* No full-ring rotation — cleaner cinematic look */
+  animation: none;
 }
 
 /* Soft circular glow */
@@ -826,10 +828,12 @@ main{position:relative;z-index:2}
 @media (max-width: 600px) {
 
   .orbit-diyas {
-    width: 82vw;
-    height: 82vw;
-    top: 51%;
-  }
+  width: min(70vw, 280px);
+  height: min(70vw, 280px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
   .orbit-diya {
     width: 30px;
@@ -1005,7 +1009,6 @@ body.pujo-entering .intro-content {
 #pujoIntro.cinematic-ready .intro-eyebrow,
 #pujoIntro.cinematic-ready h1,
 #pujoIntro.cinematic-ready .intro-subtitle,
-#pujoIntro.cinematic-ready .intro-durga,
 #pujoIntro.cinematic-ready .enter-pujo-btn,
 #pujoIntro.cinematic-ready .intro-footer {
   opacity: 0;
@@ -1057,21 +1060,6 @@ body.pujo-entering .intro-content {
   filter:
     drop-shadow(0 0 8px rgba(255,190,70,.9))
     drop-shadow(0 0 20px rgba(255,150,35,.45));
-}
-
-
-/* Durga silhouette */
-
-#pujoIntro.cinematic-ready .intro-durga {
-  filter: brightness(.4);
-  transition:
-    opacity 1.3s ease,
-    filter 1.5s ease;
-}
-
-#pujoIntro .intro-durga.cine-show {
-  opacity: 1;
-  filter: brightness(1);
 }
 
 
@@ -1138,7 +1126,4 @@ body.pujo-entering .intro-content {
     );
 
   pointer-events: none;
-}
-#pujoIntro .intro-durga {
-  display: none !important;
 }
