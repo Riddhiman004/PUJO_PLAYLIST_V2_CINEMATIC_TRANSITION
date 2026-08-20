@@ -671,19 +671,16 @@ main{position:relative;z-index:2}
 
 .orbit-diyas {
   position: absolute;
-
   left: 50%;
-  top: 50%;
+  top: 47%;
 
-  width: 420px;
-  height: 420px;
+  width: 520px;
+  height: 520px;
 
   transform: translate(-50%, -50%);
-
   z-index: 1;
   pointer-events: none;
 
-  /* Whole diya ring rotates slowly */
   animation: diyaOrbit 28s linear infinite;
 }
 
@@ -715,11 +712,11 @@ main{position:relative;z-index:2}
   filter:
     drop-shadow(0 0 7px rgba(255, 193, 72, 0.85))
     drop-shadow(0 0 18px rgba(220, 169, 67, 0.45));
-
-  /* Keeps diya upright */
+}
+.diya-icon {
+  display: block;
   animation: diyaCounterRotate 28s linear infinite;
 }
-
 
 /* =========================================
    10 DIYA POSITIONS
@@ -810,15 +807,13 @@ main{position:relative;z-index:2}
   }
 }
 
-
-/* Keeps each diya facing normally */
 @keyframes diyaCounterRotate {
   from {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: rotate(0deg);
   }
 
   to {
-    transform: translate(-50%, -50%) rotate(-360deg);
+    transform: rotate(-360deg);
   }
 }
 
@@ -830,11 +825,11 @@ main{position:relative;z-index:2}
 @media (max-width: 600px) {
 
   .orbit-diyas {
-    width: min(94vw, 360px);
-    height: min(94vw, 360px);
+    width: min(108vw, 420px);
+    height: min(108vw, 420px);
 
     left: 50%;
-    top: 50%;
+    top: 46%;
 
     transform: translate(-50%, -50%);
   }
@@ -844,7 +839,6 @@ main{position:relative;z-index:2}
     height: 30px;
     font-size: 21px;
   }
-
 }
 /* =========================================
    SMOOTH CINEMATIC ENTER PUJO TRANSITION
