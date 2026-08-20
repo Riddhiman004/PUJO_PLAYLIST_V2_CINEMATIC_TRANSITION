@@ -671,13 +671,15 @@ main{position:relative;z-index:2}
 
 .orbit-diyas {
   position: absolute;
-  left: 50%;
-  top: 47%;
 
-  width: 520px;
-  height: 520px;
+  left: 50%;
+  top: 49%;
+
+  width: 720px;
+  height: 560px;
 
   transform: translate(-50%, -50%);
+
   z-index: 1;
   pointer-events: none;
 
@@ -825,11 +827,11 @@ main{position:relative;z-index:2}
 @media (max-width: 600px) {
 
   .orbit-diyas {
-    width: min(108vw, 420px);
-    height: min(108vw, 420px);
+    width: min(135vw, 500px);
+    height: min(118vw, 440px);
 
     left: 50%;
-    top: 46%;
+    top: 49%;
 
     transform: translate(-50%, -50%);
   }
