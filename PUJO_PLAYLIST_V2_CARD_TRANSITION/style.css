@@ -681,8 +681,8 @@ main{position:relative;z-index:2}
   z-index: 0;
   pointer-events: none;
 
-  /* No full-ring rotation — cleaner cinematic look */
-  animation: none;
+  /* Full ring rotates slowly */
+animation: diyaOrbit 28s linear infinite;
 }
 
 /* Soft circular glow */
