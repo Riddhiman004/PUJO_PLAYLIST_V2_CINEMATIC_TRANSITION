@@ -564,77 +564,79 @@ function setSleepTimer(minutes){
     showToast("Sleep Timer ended — playback stopped");
   }, minutes*60*1000);
 }
-function runPujoCinematicIntro(){
+function runPujoCinematicIntro() {
   const intro = document.getElementById("pujoIntro");
+  if (!intro) return;
 
-  if(!intro) return;
-
-  intro.classList.add("cinematic-ready");
-
-  const mainDiya = intro.querySelector(".intro-diya");
-  const orbitDiyas = [...intro.querySelectorAll(".orbit-diya")];
-
+  const firstDiya = intro.querySelector(".intro-diya");
+  const orbitDiyas = intro.querySelectorAll(".orbit-diya");
   const ornament = intro.querySelector(".intro-ornament");
-  const durga = intro.querySelector(".intro-durga");
   const eyebrow = intro.querySelector(".intro-eyebrow");
   const title = intro.querySelector("h1");
   const subtitle = intro.querySelector(".intro-subtitle");
   const enterBtn = intro.querySelector(".enter-pujo-btn");
   const footer = intro.querySelector(".intro-footer");
 
-  /* 1. Darkness -> first diya */
-  setTimeout(()=>{
-    mainDiya?.classList.add("cine-show");
-  },350);
+  // Start from darkness
+  firstDiya?.classList.remove("cine-show");
+  ornament?.classList.remove("cine-show");
+  eyebrow?.classList.remove("cine-show");
+  title?.classList.remove("cine-show");
+  subtitle?.classList.remove("cine-show");
+  enterBtn?.classList.remove("cine-show");
+  footer?.classList.remove("cine-show");
 
-  /* 2. Durga form slowly appears */
-  setTimeout(()=>{
-    durga?.classList.add("cine-show");
-  },900);
+  orbitDiyas.forEach(diya => diya.classList.remove("cine-lit"));
 
-  /* 3. Light 10 diyas one after another */
-  orbitDiyas.forEach((diya,index)=>{
-    setTimeout(()=>{
+  // 1. First diya
+  setTimeout(() => {
+    firstDiya?.classList.add("cine-show");
+  }, 500);
+
+  // 2. 10 diyas — one by one
+  orbitDiyas.forEach((diya, index) => {
+    setTimeout(() => {
       diya.classList.add("cine-lit");
-    },1150 + index * 120);
+    }, 1100 + index * 140);
   });
 
-  /* 4. Ornament */
-  setTimeout(()=>{
+  // 3. Ornament
+  setTimeout(() => {
     ornament?.classList.add("cine-show");
-  },2250);
+  }, 2500);
 
-  /* 5. Small heading */
-  setTimeout(()=>{
+  // 4. Small heading
+  setTimeout(() => {
     eyebrow?.classList.add("cine-show");
-  },2550);
+  }, 2750);
 
-  /* 6. SHUBHO SHARODIYA */
-  setTimeout(()=>{
+  // 5. SHUBHO SHARODIYA
+  setTimeout(() => {
     title?.classList.add("cine-show");
-  },2850);
+  }, 3050);
 
-  /* 7. Bengali line */
-  setTimeout(()=>{
+  // 6. Bengali subtitle
+  setTimeout(() => {
     subtitle?.classList.add("cine-show");
-  },3250);
+  }, 3400);
 
-  /* 8. ENTER PUJO */
-  setTimeout(()=>{
+  // 7. ENTER PUJO
+  setTimeout(() => {
     enterBtn?.classList.add("cine-show");
-  },3650);
+  }, 3800);
 
-  /* 9. Footer */
-  setTimeout(()=>{
+  // 8. Footer
+  setTimeout(() => {
     footer?.classList.add("cine-show");
-  },3950);
+  }, 4100);
 }
 function initPujoIntro(){
   const intro = document.getElementById("pujoIntro");
   const enterBtn = document.getElementById("enterPujoBtn");
 
   if(!intro || !enterBtn) return;
-  runPujoCinematicIntro();
+   runPujoCinematicIntro();
+
 
   // Intro will appear every time the website is opened or refreshed.
   enterBtn.addEventListener("click",()=>{
