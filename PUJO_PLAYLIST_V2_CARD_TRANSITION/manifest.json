@@ -1,0 +1,22 @@
+{
+  "name": "PUJO PLAYLIST",
+  "short_name": "PUJO PLAYLIST",
+  "description": "পুজোর গানে, পুজোর টানে",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b0b",
+  "theme_color": "#0b0b0b",
+  "orientation": "portrait",
+  "icons": [
+  {
+    "src": "/icons/icon-192(1).png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },
+  {
+    "src": "/icons/icon-512(1).png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }
+]
+}
