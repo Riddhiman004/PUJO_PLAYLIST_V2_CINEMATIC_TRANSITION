@@ -671,18 +671,20 @@ main{position:relative;z-index:2}
 
 .orbit-diyas {
   position: absolute;
+
   left: 50%;
   top: 50%;
 
-  width: 360px;
-  height: 360px;
+  width: 420px;
+  height: 420px;
 
   transform: translate(-50%, -50%);
-  z-index: 0;
+
+  z-index: 1;
   pointer-events: none;
 
-  /* No full-ring rotation — cleaner cinematic look */
-  animation: none;
+  /* Whole diya ring rotates slowly */
+  animation: diyaOrbit 28s linear infinite;
 }
 
 /* Soft circular glow */
@@ -828,18 +830,21 @@ main{position:relative;z-index:2}
 @media (max-width: 600px) {
 
   .orbit-diyas {
-  width: min(70vw, 280px);
-  height: min(70vw, 280px);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+    width: min(94vw, 360px);
+    height: min(94vw, 360px);
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+  }
 
   .orbit-diya {
     width: 30px;
     height: 30px;
     font-size: 21px;
   }
+
 }
 /* =========================================
    SMOOTH CINEMATIC ENTER PUJO TRANSITION
@@ -1136,4 +1141,12 @@ body.pujo-entering .intro-content {
 #pujoIntro.cinematic-ready .intro-footer.cine-show {
   opacity: 1;
   transform: translateY(0);
+}
+#pujoIntro .intro-eyebrow,
+#pujoIntro h1,
+#pujoIntro .intro-subtitle,
+#pujoIntro .enter-pujo-btn,
+#pujoIntro .intro-footer {
+  position: relative;
+  z-index: 3;
 }
