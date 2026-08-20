@@ -994,3 +994,148 @@ body.pujo-entering .intro-content {
     filter: brightness(1.35);
   }
 }
+/* =========================================
+   PUJO INTRO - CINEMATIC OPENING SEQUENCE
+   ========================================= */
+
+/* Elements start hidden only while cinematic mode is active */
+
+#pujoIntro.cinematic-ready .intro-diya,
+#pujoIntro.cinematic-ready .intro-ornament,
+#pujoIntro.cinematic-ready .intro-eyebrow,
+#pujoIntro.cinematic-ready h1,
+#pujoIntro.cinematic-ready .intro-subtitle,
+#pujoIntro.cinematic-ready .intro-durga,
+#pujoIntro.cinematic-ready .enter-pujo-btn,
+#pujoIntro.cinematic-ready .intro-footer {
+  opacity: 0;
+}
+
+#pujoIntro.cinematic-ready .intro-ornament,
+#pujoIntro.cinematic-ready .intro-eyebrow,
+#pujoIntro.cinematic-ready h1,
+#pujoIntro.cinematic-ready .intro-subtitle,
+#pujoIntro.cinematic-ready .enter-pujo-btn,
+#pujoIntro.cinematic-ready .intro-footer {
+  transform: translateY(14px);
+}
+
+
+/* Single diya */
+
+#pujoIntro.cinematic-ready .intro-diya {
+  transform: scale(.3);
+  filter: brightness(.45);
+  transition:
+    opacity .8s ease,
+    transform 1s cubic-bezier(.22,.61,.36,1),
+    filter 1s ease;
+}
+
+#pujoIntro .intro-diya.cine-show {
+  opacity: 1;
+  transform: scale(1);
+  filter:
+    brightness(1.15)
+    drop-shadow(0 0 12px rgba(255,185,70,.8))
+    drop-shadow(0 0 28px rgba(255,140,30,.35));
+}
+
+
+/* 10 orbit diyas */
+
+#pujoIntro.cinematic-ready .orbit-diya {
+  opacity: 0;
+  transition:
+    opacity .55s ease,
+    filter .7s ease;
+}
+
+#pujoIntro .orbit-diya.cine-lit {
+  opacity: 1;
+
+  filter:
+    drop-shadow(0 0 8px rgba(255,190,70,.9))
+    drop-shadow(0 0 20px rgba(255,150,35,.45));
+}
+
+
+/* Durga silhouette */
+
+#pujoIntro.cinematic-ready .intro-durga {
+  filter: brightness(.4);
+  transition:
+    opacity 1.3s ease,
+    filter 1.5s ease;
+}
+
+#pujoIntro .intro-durga.cine-show {
+  opacity: 1;
+  filter: brightness(1);
+}
+
+
+/* Text sequence */
+
+#pujoIntro.cinematic-ready .intro-ornament,
+#pujoIntro.cinematic-ready .intro-eyebrow,
+#pujoIntro.cinematic-ready h1,
+#pujoIntro.cinematic-ready .intro-subtitle,
+#pujoIntro.cinematic-ready .enter-pujo-btn,
+#pujoIntro.cinematic-ready .intro-footer {
+  transition:
+    opacity .9s ease,
+    transform .9s cubic-bezier(.22,.61,.36,1),
+    filter .9s ease;
+}
+
+#pujoIntro .cine-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* SHUBHO SHARODIYA gets a subtle golden reveal */
+
+#pujoIntro h1.cine-show {
+  filter:
+    drop-shadow(0 0 16px rgba(220,169,67,.15));
+}
+
+
+/* ENTER PUJO appears last */
+
+#pujoIntro .enter-pujo-btn.cine-show {
+  animation: cinematicEnterPulse 2.3s ease-in-out infinite;
+}
+
+@keyframes cinematicEnterPulse {
+  0%,100% {
+    box-shadow:
+      0 0 0 rgba(220,169,67,0);
+  }
+
+  50% {
+    box-shadow:
+      0 0 22px rgba(220,169,67,.16);
+  }
+}
+
+
+/* Initial darkness */
+
+#pujoIntro.cinematic-ready::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(80,25,8,.18),
+      rgba(3,1,1,.94) 72%
+    );
+
+  pointer-events: none;
+}

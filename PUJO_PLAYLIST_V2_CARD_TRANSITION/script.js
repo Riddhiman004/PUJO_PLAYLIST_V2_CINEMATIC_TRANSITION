@@ -564,14 +564,97 @@ function setSleepTimer(minutes){
     showToast("Sleep Timer ended — playback stopped");
   }, minutes*60*1000);
 }
+function runPujoCinematicIntro(){
+  const intro = document.getElementById("pujoIntro");
+
+  if(!intro) return;
+
+  intro.classList.add("cinematic-ready");
+
+  const mainDiya = intro.querySelector(".intro-diya");
+  const orbitDiyas = [...intro.querySelectorAll(".orbit-diya")];
+
+  const ornament = intro.querySelector(".intro-ornament");
+  const durga = intro.querySelector(".intro-durga");
+  const eyebrow = intro.querySelector(".intro-eyebrow");
+  const title = intro.querySelector("h1");
+  const subtitle = intro.querySelector(".intro-subtitle");
+  const enterBtn = intro.querySelector(".enter-pujo-btn");
+  const footer = intro.querySelector(".intro-footer");
+
+  /* 1. Darkness -> first diya */
+  setTimeout(()=>{
+    mainDiya?.classList.add("cine-show");
+  },350);
+
+  /* 2. Durga form slowly appears */
+  setTimeout(()=>{
+    durga?.classList.add("cine-show");
+  },900);
+
+  /* 3. Light 10 diyas one after another */
+  orbitDiyas.forEach((diya,index)=>{
+    setTimeout(()=>{
+      diya.classList.add("cine-lit");
+    },1150 + index * 120);
+  });
+
+  /* 4. Ornament */
+  setTimeout(()=>{
+    ornament?.classList.add("cine-show");
+  },2250);
+
+  /* 5. Small heading */
+  setTimeout(()=>{
+    eyebrow?.classList.add("cine-show");
+  },2550);
+
+  /* 6. SHUBHO SHARODIYA */
+  setTimeout(()=>{
+    title?.classList.add("cine-show");
+  },2850);
+
+  /* 7. Bengali line */
+  setTimeout(()=>{
+    subtitle?.classList.add("cine-show");
+  },3250);
+
+  /* 8. ENTER PUJO */
+  setTimeout(()=>{
+    enterBtn?.classList.add("cine-show");
+  },3650);
+
+  /* 9. Footer */
+  setTimeout(()=>{
+    footer?.classList.add("cine-show");
+  },3950);
+}
 function initPujoIntro(){
   const intro = document.getElementById("pujoIntro");
   const enterBtn = document.getElementById("enterPujoBtn");
 
   if(!intro || !enterBtn) return;
+  runPujoCinematicIntro();
 
   // Intro will appear every time the website is opened or refreshed.
   enterBtn.addEventListener("click",()=>{
+    const introDhak = new Audio(
+    "songs/ambience/mythologychallengeryt-durga-puja-dhak-sound-9330.mp3"
+  );
+
+  introDhak.volume = 0.12;
+  introDhak.play().catch(()=>{});
+
+  setTimeout(()=>{
+    const fade = setInterval(()=>{
+      introDhak.volume = Math.max(0, introDhak.volume - 0.015);
+
+      if(introDhak.volume <= 0){
+        clearInterval(fade);
+        introDhak.pause();
+      }
+    },120);
+  },900);
     intro.classList.add("hidden");
 
     setTimeout(()=>{
