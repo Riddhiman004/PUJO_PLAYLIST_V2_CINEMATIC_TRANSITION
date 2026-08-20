@@ -1,4 +1,4 @@
-const CACHE_NAME = "pujo-playlist-v1";
+const CACHE_NAME = "pujo-playlist-v3";
 
 const APP_FILES = [
   "/",

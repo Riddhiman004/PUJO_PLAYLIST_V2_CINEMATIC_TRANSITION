@@ -1127,3 +1127,13 @@ body.pujo-entering .intro-content {
 
   pointer-events: none;
 }
+/* FIX: reveal cinematic intro text correctly */
+#pujoIntro.cinematic-ready .intro-ornament.cine-show,
+#pujoIntro.cinematic-ready .intro-eyebrow.cine-show,
+#pujoIntro.cinematic-ready h1.cine-show,
+#pujoIntro.cinematic-ready .intro-subtitle.cine-show,
+#pujoIntro.cinematic-ready .enter-pujo-btn.cine-show,
+#pujoIntro.cinematic-ready .intro-footer.cine-show {
+  opacity: 1;
+  transform: translateY(0);
+}
