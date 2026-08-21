@@ -1,4 +1,4 @@
-const CACHE_NAME = "pujo-playlist-v4";
+const CACHE_NAME = "pujo-playlist-v5";
 
 const APP_FILES = [
   "/",
@@ -7,8 +7,8 @@ const APP_FILES = [
   "/script.js",
   "/songs.js",
   "/manifest.json",
-  "/icons/icon-192(1).png",
-  "/icons/icon-512(1).png"
+  "/icons/pujo_playlist_icon_192.png",
+  "/icons/pujo_playlist_icon_512.png"
 ];
 
 
