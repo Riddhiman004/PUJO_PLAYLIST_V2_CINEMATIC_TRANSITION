@@ -698,10 +698,23 @@ setTimeout(() => {
 function initPujoIntro(){
   const intro = document.getElementById("pujoIntro");
   const enterBtn = document.getElementById("enterPujoBtn");
+  const skipBtn = document.getElementById("skipIntroBtn");
 
   if(!intro || !enterBtn) return;
-   runPujoCinematicIntro();
 
+  runPujoCinematicIntro();
+
+
+  // SKIP INTRO
+  skipBtn?.addEventListener("click", () => {
+
+    intro.classList.add("hidden");
+
+    setTimeout(() => {
+      intro.remove();
+  }, 1000);
+
+  });
 
   // Intro will appear every time the website is opened or refreshed.
   enterBtn.addEventListener("click",()=>{
