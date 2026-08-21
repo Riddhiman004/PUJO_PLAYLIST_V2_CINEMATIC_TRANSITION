@@ -1139,3 +1139,87 @@ body.pujo-entering .intro-content {
   position: relative;
   z-index: 3;
 }
+
+/* =========================================
+   INSTALL PUJO APP
+   ========================================= */
+
+.install-app-btn {
+  display: none;
+
+  margin: 18px auto 0;
+  padding: 11px 18px;
+
+  align-items: center;
+  gap: 12px;
+
+  border: 1px solid rgba(220, 169, 67, 0.42);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(220, 169, 67, 0.10),
+      rgba(80, 22, 8, 0.22)
+    );
+
+  color: var(--cream);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.22),
+    0 0 24px rgba(220, 169, 67, 0.06);
+
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
+}
+
+.install-app-btn.show {
+  display: inline-flex;
+}
+
+.install-app-btn > span:first-child {
+  font-size: 17px;
+  color: var(--gold);
+}
+
+.install-app-btn > span:nth-child(2) {
+  text-align: left;
+}
+
+.install-app-btn small {
+  display: block;
+  font-size: 5px;
+  letter-spacing: 2px;
+  color: #8f7964;
+}
+
+.install-app-btn strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 8px;
+  letter-spacing: 1.6px;
+  color: #ead09a;
+}
+
+.install-app-btn b {
+  margin-left: 6px;
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.install-app-btn:hover {
+  transform: translateY(-3px);
+  border-color: rgba(244, 215, 142, 0.75);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.30),
+    0 0 28px rgba(220, 169, 67, 0.13);
+}
+
+.install-app-btn:active {
+  transform: scale(.97);
+}

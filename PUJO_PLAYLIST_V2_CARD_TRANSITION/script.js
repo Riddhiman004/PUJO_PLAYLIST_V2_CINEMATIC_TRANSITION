@@ -14,6 +14,7 @@ let ambienceMaster = null;
 let ambienceTimers = [];
 let toastTimer = null;
 let sleepTimer = null;
+let deferredInstallPrompt = null;
 let moodMode = localStorage.getItem("pujoMoodMode") || "auto";
 
 const views = ["home","playlist-old","playlist-new","mahalaya"];
@@ -29,6 +30,7 @@ function init(){
   bindPlayer();
   bindMoodPanel();
   setupPujoIntroTransition();
+  setupInstallApp();
   updateClock();
   updateCountdowns();
   applyMood();
@@ -45,6 +47,69 @@ function init(){
   }
 }
 document.addEventListener("DOMContentLoaded",init);
+/* =========================================
+   INSTALL PUJO APP
+   ========================================= */
+
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+
+  deferredInstallPrompt = event;
+
+  const installBtn = document.getElementById("installAppBtn");
+
+  if (installBtn) {
+    installBtn.classList.add("show");
+  }
+});
+
+
+function setupInstallApp() {
+  const installBtn = document.getElementById("installAppBtn");
+
+  if (!installBtn) return;
+
+  const alreadyInstalled =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
+
+  if (alreadyInstalled) {
+    installBtn.classList.remove("show");
+    return;
+  }
+
+  installBtn.addEventListener("click", async () => {
+
+    if (!deferredInstallPrompt) {
+      showToast("Install option is not available yet.");
+      return;
+    }
+
+    deferredInstallPrompt.prompt();
+
+    const choice = await deferredInstallPrompt.userChoice;
+
+    deferredInstallPrompt = null;
+    installBtn.classList.remove("show");
+
+    if (choice.outcome === "accepted") {
+      showToast("Installing PUJO PLAYLIST...");
+    }
+  });
+}
+
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+
+  const installBtn = document.getElementById("installAppBtn");
+
+  if (installBtn) {
+    installBtn.classList.remove("show");
+  }
+
+  showToast("PUJO PLAYLIST installed ✨");
+});
 /* =========================================
    ENTER PUJO CINEMATIC TRANSITION
    ========================================= */
