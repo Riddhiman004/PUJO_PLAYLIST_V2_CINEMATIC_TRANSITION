@@ -1277,3 +1277,222 @@ body.pujo-entering .intro-content {
     letter-spacing: 1.5px;
   }
 }
+/* =========================================
+   AUDIO EQUALIZER
+   ========================================= */
+
+.eq-panel {
+  display: none;
+  margin-top: 14px;
+  padding: 18px;
+
+  border: 1px solid rgba(220, 169, 67, 0.25);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(220, 169, 67, 0.07),
+      rgba(20, 7, 3, 0.72)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 230, 180, 0.04),
+    0 14px 35px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(16px);
+}
+
+.eq-panel.show {
+  display: block;
+}
+
+
+/* HEADER */
+
+.eq-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.eq-head small {
+  display: block;
+  font-size: 5px;
+  letter-spacing: 2.5px;
+  color: #8e7762;
+}
+
+.eq-head strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #ead09a;
+}
+
+#closeEqBtn {
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid rgba(220, 169, 67, 0.25);
+  border-radius: 50%;
+
+  background: transparent;
+  color: #bca174;
+
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/* PRESETS */
+
+.eq-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  margin-bottom: 22px;
+}
+
+.eq-presets button {
+  padding: 6px 9px;
+
+  border: 1px solid rgba(220, 169, 67, 0.20);
+  border-radius: 999px;
+
+  background: rgba(220, 169, 67, 0.04);
+  color: #99846c;
+
+  font-size: 6px;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  transition: .25s ease;
+}
+
+.eq-presets button:hover,
+.eq-presets button.active {
+  color: #f0d89f;
+  border-color: rgba(220, 169, 67, 0.65);
+  background: rgba(220, 169, 67, 0.12);
+}
+
+
+/* 5 EQ BANDS */
+
+.eq-bands {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 9px;
+
+  min-height: 175px;
+}
+
+.eq-bands label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+}
+
+.eq-bands label > span {
+  font-size: 5px;
+  color: #63574b;
+}
+
+
+/* VERTICAL SLIDERS */
+
+.eq-bands input[type="range"] {
+  width: 110px;
+  height: 5px;
+
+  transform: rotate(-90deg);
+
+  accent-color: #dca943;
+
+  cursor: pointer;
+
+  margin: 48px -38px;
+}
+
+.eq-bands b {
+  font-size: 7px;
+  font-weight: 500;
+  color: #d9bd85;
+}
+
+.eq-bands small {
+  font-size: 4px;
+  letter-spacing: 1px;
+  color: #706050;
+}
+
+
+/* FOOTER */
+
+.eq-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 12px;
+}
+
+.eq-footer span {
+  font-size: 5px;
+  color: #64564a;
+}
+
+#resetEqBtn {
+  padding: 6px 10px;
+
+  border: 1px solid rgba(220, 169, 67, 0.24);
+  border-radius: 999px;
+
+  background: transparent;
+  color: #ac916b;
+
+  font-size: 5px;
+  letter-spacing: 1.4px;
+
+  cursor: pointer;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .eq-panel {
+    padding: 14px 10px;
+  }
+
+  .eq-presets {
+    justify-content: center;
+  }
+
+  .eq-bands {
+    gap: 3px;
+    min-height: 160px;
+  }
+
+  .eq-bands input[type="range"] {
+    width: 92px;
+    margin: 40px -32px;
+  }
+
+  .eq-bands b {
+    font-size: 6px;
+  }
+
+  .eq-bands small {
+    font-size: 3.5px;
+  }
+}

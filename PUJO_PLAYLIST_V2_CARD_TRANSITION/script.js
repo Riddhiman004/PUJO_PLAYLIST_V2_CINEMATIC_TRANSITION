@@ -1,6 +1,9 @@
 const audio = document.getElementById("audio");
 const $ = id => document.getElementById(id);
-
+let eqAudioCtx = null;
+let eqSource = null;
+let eqFilters = [];
+let eqReady = false;
 let currentView = "home";
 let activePlaylistKey = "oldGold";
 let currentIndex = -1;
@@ -28,6 +31,7 @@ function init(){
   makeParticles();
   bindNavigation();
   bindPlayer();
+  setupEqualizer();
   bindMoodPanel();
   setupPujoIntroTransition();
   setupInstallApp();
@@ -477,7 +481,369 @@ document.querySelectorAll("[data-sleep]").forEach(btn=>{
   audio.addEventListener("ended",handleEnded);
   audio.addEventListener("error",()=>showToast("Audio file could not be loaded — check songs.js."));
 }
+/* =========================================
+   REAL AUDIO EQUALIZER
+   ========================================= */
 
+const EQ_CONFIG = [
+  { id: "eq60", freq: 60, type: "lowshelf" },
+  { id: "eq250", freq: 250, type: "peaking" },
+  { id: "eq1000", freq: 1000, type: "peaking" },
+  { id: "eq4000", freq: 4000, type: "peaking" },
+  { id: "eq12000", freq: 12000, type: "highshelf" }
+];
+
+const EQ_PRESETS = {
+  flat:  [0, 0, 0, 0, 0],
+  bass:  [8, 5, 1, 0, 1],
+  dance: [6, 3, -1, 3, 5],
+  vocal: [-2, 0, 3, 5, 2],
+  soft:  [2, 1, 0, -2, -3]
+};
+
+
+function ensureEqualizer() {
+
+  if (eqReady) {
+    if (eqAudioCtx?.state === "suspended") {
+      eqAudioCtx.resume().catch(() => {});
+    }
+    return true;
+  }
+
+  const AudioContextClass =
+    window.AudioContext || window.webkitAudioContext;
+
+  if (!AudioContextClass) {
+    showToast("Equalizer is not supported on this device.");
+    return false;
+  }
+
+  try {
+
+    eqAudioCtx = new AudioContextClass();
+
+    // IMPORTANT:
+    // create this only ONCE for the main #audio player
+    eqSource = eqAudioCtx.createMediaElementSource(audio);
+
+    eqFilters = EQ_CONFIG.map(config => {
+
+      const filter = eqAudioCtx.createBiquadFilter();
+
+      filter.type = config.type;
+      filter.frequency.value = config.freq;
+      filter.gain.value = 0;
+
+      if (config.type === "peaking") {
+        filter.Q.value = 1;
+      }
+
+      return filter;
+    });
+
+
+    // AUDIO → 60 → 250 → 1K → 4K → 12K → SPEAKERS
+
+    eqSource.connect(eqFilters[0]);
+
+    for (let i = 0; i < eqFilters.length - 1; i++) {
+      eqFilters[i].connect(eqFilters[i + 1]);
+    }
+
+    eqFilters[eqFilters.length - 1]
+      .connect(eqAudioCtx.destination);
+
+
+    eqReady = true;
+
+    // Apply current slider positions
+    EQ_CONFIG.forEach((config, index) => {
+      const slider = document.getElementById(config.id);
+
+      if (slider) {
+        eqFilters[index].gain.value = Number(slider.value);
+      }
+    });
+
+
+    if (eqAudioCtx.state === "suspended") {
+      eqAudioCtx.resume().catch(() => {});
+    }
+
+    return true;
+
+  } catch (error) {
+
+    console.error("Equalizer setup failed:", error);
+    showToast("Equalizer could not start.");
+
+    return false;
+  }
+}
+
+
+function setupEqualizer() {
+
+  const eqBtn = document.getElementById("eqBtn");
+  const panel = document.getElementById("eqPanel");
+  const closeBtn = document.getElementById("closeEqBtn");
+  const resetBtn = document.getElementById("resetEqBtn");
+
+  if (!eqBtn || !panel) return;
+
+
+  /* -------------------------
+     Restore saved EQ
+     ------------------------- */
+
+  let savedEQ = null;
+
+  try {
+    savedEQ = JSON.parse(
+      localStorage.getItem("pujoEqualizer") || "null"
+    );
+  } catch (e) {
+    savedEQ = null;
+  }
+
+  if (savedEQ?.values) {
+
+    EQ_CONFIG.forEach((config, index) => {
+      const slider = document.getElementById(config.id);
+
+      if (slider) {
+        slider.value = savedEQ.values[index] ?? 0;
+      }
+    });
+
+  }
+
+
+  /* -------------------------
+     Open / Close
+     ------------------------- */
+
+  eqBtn.addEventListener("click", () => {
+
+    panel.classList.toggle("show");
+
+    // User gesture = safe time to start Web Audio,
+    // including iPhone / Safari.
+    if (panel.classList.contains("show")) {
+      ensureEqualizer();
+    }
+
+  });
+
+
+  closeBtn?.addEventListener("click", () => {
+    panel.classList.remove("show");
+  });
+
+
+  /* -------------------------
+     Manual sliders
+     ------------------------- */
+
+  EQ_CONFIG.forEach((config, index) => {
+
+    const slider = document.getElementById(config.id);
+
+    if (!slider) return;
+
+    slider.addEventListener("input", () => {
+
+      if (!ensureEqualizer()) return;
+
+      const value = Number(slider.value);
+
+      eqFilters[index].gain.setTargetAtTime(
+        value,
+        eqAudioCtx.currentTime,
+        0.03
+      );
+
+
+      // Manual adjustment = no preset selected
+      document
+        .querySelectorAll("[data-eq-preset]")
+        .forEach(btn => btn.classList.remove("active"));
+
+
+      saveEQSettings();
+
+    });
+
+  });
+
+
+  /* -------------------------
+     Presets
+     ------------------------- */
+
+  document
+    .querySelectorAll("[data-eq-preset]")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        if (!ensureEqualizer()) return;
+
+        const presetName = button.dataset.eqPreset;
+        const values = EQ_PRESETS[presetName];
+
+        if (!values) return;
+
+
+        EQ_CONFIG.forEach((config, index) => {
+
+          const slider = document.getElementById(config.id);
+
+          if (slider) {
+            slider.value = values[index];
+          }
+
+          eqFilters[index].gain.setTargetAtTime(
+            values[index],
+            eqAudioCtx.currentTime,
+            0.04
+          );
+
+        });
+
+
+        document
+          .querySelectorAll("[data-eq-preset]")
+          .forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+
+
+        localStorage.setItem(
+          "pujoEqualizer",
+          JSON.stringify({
+            preset: presetName,
+            values: values
+          })
+        );
+
+
+        const names = {
+          flat: "Normal",
+          bass: "Bass Boost",
+          dance: "Dance",
+          vocal: "Vocal",
+          soft: "Soft"
+        };
+
+        showToast(`EQ · ${names[presetName]}`);
+
+      });
+
+    });
+
+
+  /* -------------------------
+     RESET
+     ------------------------- */
+
+  resetBtn?.addEventListener("click", () => {
+
+    if (!ensureEqualizer()) return;
+
+    EQ_CONFIG.forEach((config, index) => {
+
+      const slider = document.getElementById(config.id);
+
+      if (slider) {
+        slider.value = 0;
+      }
+
+      eqFilters[index].gain.setTargetAtTime(
+        0,
+        eqAudioCtx.currentTime,
+        0.04
+      );
+
+    });
+
+
+    document
+      .querySelectorAll("[data-eq-preset]")
+      .forEach(btn => btn.classList.remove("active"));
+
+
+    const normalBtn =
+      document.querySelector('[data-eq-preset="flat"]');
+
+    normalBtn?.classList.add("active");
+
+
+    localStorage.setItem(
+      "pujoEqualizer",
+      JSON.stringify({
+        preset: "flat",
+        values: [0, 0, 0, 0, 0]
+      })
+    );
+
+
+    showToast("Equalizer reset");
+
+  });
+
+
+  /* -------------------------
+     Resume Web Audio
+     after phone/browser pause
+     ------------------------- */
+
+  audio.addEventListener("play", () => {
+
+    if (
+      eqAudioCtx &&
+      eqAudioCtx.state === "suspended"
+    ) {
+      eqAudioCtx.resume().catch(() => {});
+    }
+
+  });
+
+
+  /* Mark saved preset active */
+
+  if (savedEQ?.preset) {
+    document
+      .querySelector(
+        `[data-eq-preset="${savedEQ.preset}"]`
+      )
+      ?.classList.add("active");
+  } else {
+    document
+      .querySelector('[data-eq-preset="flat"]')
+      ?.classList.add("active");
+  }
+
+}
+
+
+function saveEQSettings() {
+
+  const values = EQ_CONFIG.map(config => {
+    return Number(
+      document.getElementById(config.id)?.value || 0
+    );
+  });
+
+  localStorage.setItem(
+    "pujoEqualizer",
+    JSON.stringify({
+      preset: "custom",
+      values: values
+    })
+  );
+}
 function playAll(){
   const p=playlists[activePlaylistKey];
   const first=p.tracks.findIndex(t=>t.file);

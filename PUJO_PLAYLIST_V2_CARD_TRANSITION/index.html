@@ -252,7 +252,74 @@
           <div class="player-actions">
             <button id="favoriteBtn" type="button">♡ Favorite</button>
             <button id="queueBtn" type="button">＋ Queue</button>
+            <button id="eqBtn" type="button">🎚 EQ</button>
           </div>
+          <!-- AUDIO EQUALIZER -->
+<div id="eqPanel" class="eq-panel">
+
+  <div class="eq-head">
+    <div>
+      <small>SOUND CONTROL</small>
+      <strong>EQUALIZER</strong>
+    </div>
+
+    <button id="closeEqBtn" type="button">×</button>
+  </div>
+
+  <div class="eq-presets">
+    <button data-eq-preset="flat" type="button">Normal</button>
+    <button data-eq-preset="bass" type="button">Bass Boost</button>
+    <button data-eq-preset="dance" type="button">Dance</button>
+    <button data-eq-preset="vocal" type="button">Vocal</button>
+    <button data-eq-preset="soft" type="button">Soft</button>
+  </div>
+
+  <div class="eq-bands">
+
+    <label>
+      <span>+12</span>
+      <input id="eq60" type="range" min="-12" max="12" value="0" step="1">
+      <b>60</b>
+      <small>BASS</small>
+    </label>
+
+    <label>
+      <span>+12</span>
+      <input id="eq250" type="range" min="-12" max="12" value="0" step="1">
+      <b>250</b>
+      <small>LOW</small>
+    </label>
+
+    <label>
+      <span>+12</span>
+      <input id="eq1000" type="range" min="-12" max="12" value="0" step="1">
+      <b>1K</b>
+      <small>MID</small>
+    </label>
+
+    <label>
+      <span>+12</span>
+      <input id="eq4000" type="range" min="-12" max="12" value="0" step="1">
+      <b>4K</b>
+      <small>CLARITY</small>
+    </label>
+
+    <label>
+      <span>+12</span>
+      <input id="eq12000" type="range" min="-12" max="12" value="0" step="1">
+      <b>12K</b>
+      <small>TREBLE</small>
+    </label>
+
+  </div>
+
+  <div class="eq-footer">
+    <span>−12 dB</span>
+    <button id="resetEqBtn" type="button">RESET EQ</button>
+    <span>+12 dB</span>
+  </div>
+
+</div>
           <div class="sleep-timer-wrap">
   <button id="sleepTimerBtn" class="sleep-timer-btn" type="button">
     🌙 Sleep Timer
