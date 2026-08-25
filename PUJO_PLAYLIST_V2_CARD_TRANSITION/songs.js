@@ -180,9 +180,9 @@ blank(
 ),
 
 blank(
-  "Bengali Latest DJ",
-  "DJ Remix",
-  "songs/new-dance/Bengali_Latest_Dj_Uri_Uri_Baba_JBL_Bass_Matal_Dance_Dhamaka_Dj_প্রেম_জেগেছে_আমার_মনে_বলি_আমি_তাই_Dj(128k).mp3"
+  "Uri Baba",
+  "Bengali DJ Song",
+  "songs/new-dance/Uri baba DJ.mp3"
 ),
 
 blank(
@@ -246,15 +246,15 @@ blank(
 ),
 
 blank(
-  "Hamar Piyawa Chalawe Diesel Gadiya",
+  "Hamar Piyawa Diesel Gari",
   "DJ Dheeraj Dhanbad",
-  "songs/new-dance/Hamar_Piyawa_Chalawe_Diesel_Gadiya_😍Jumping_Dance_Mix💘_Dj_Dheeraj_Dhanbad_🤩New_Khortha_Dj_Song(128k).mp3"
+  "songs/new-dance/Hamar Piyawa diesel gari.mp3"
 ),
 
 blank(
   "Hero Vs Nagin Vs Horn",
   "DJ Anant Chitali",
-  "songs/new-dance/HERO_vs_NAGIN_vs_HORN_(BEND_PARTY_MIX_)_DJ_ANANT_CHITALI(128k).mp3"
+  "songs/new-dance/Hero vs Nagin vs Horn.mp3"
 ),
 
 blank(
@@ -266,7 +266,7 @@ blank(
 blank(
   "Jabar Belai Dekha Holo",
   "DJ Remix",
-  "songs/new-dance/Jabar_belai_dekha_holo_kotha_holo_na_remix_song__2018_best_dj_song(128k).mp3"
+  "songs/new-dance/Jabar belai dekha holo.mp3"
 ),
 
 blank(
@@ -314,7 +314,7 @@ blank(
 blank(
   "Menoka Mathay Dilo Ghumta",
   "DJ Kiran KM Production",
-  "songs/new-dance/Menoka_Mathay_Dilo_Ghumta__Supar_Matal_Dance_DJ_Kiran_KM_Production(128k).mp3"
+  "songs/new-dance/Menoka Mathay Dilo Ghumta.mp3"
 ),
 
 blank(
@@ -332,7 +332,7 @@ blank(
 blank(
   "Nagin Dance Remix",
   "DJ Remix",
-  "songs/new-dance/Nagin_Dance_Remix____High_Bass_Full_DJ_Song__2021_DJ_remix__eagle_mix(128k).mp3"
+  "songs/new-dance/Nagin Dance Remix.mp3"
 ),
 
 blank(
@@ -368,7 +368,7 @@ blank(
 blank(
   "Teri Aankho Ka Yo Kajal",
   "DJ Remix",
-  "songs/new-dance/Teri_Aankho_Ka_yo_Kajal_🎶_Remix_hard_bass_🎵Dj_mix_2019_💞_sapna_choudhary_dance_💃_crazy_dj_mix(128k).mp3"
+  "songs/new-dance/Teri Aankho Ka Yo Kajal.mp3"
 ),
 
 blank(
