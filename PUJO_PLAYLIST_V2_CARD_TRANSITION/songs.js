@@ -248,7 +248,7 @@ blank(
 blank(
   "Hamar Piyawa Diesel Gari",
   "DJ Dheeraj Dhanbad",
-  "songs/new-dance/Hamar Piyawa diesel gari.mp3"
+  "songs/new-dance/Hamar Piyawa disel gari.mp3"
 ),
 
 blank(
