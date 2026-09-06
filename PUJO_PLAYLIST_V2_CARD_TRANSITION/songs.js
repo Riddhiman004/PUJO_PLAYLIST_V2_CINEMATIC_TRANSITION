@@ -85,11 +85,265 @@ const playlists = {
       blank("Tomari Chalar Pathe Ekanta Apan",
       "Asha Bhosle",
       "songs/old-gold/Tomari-Chalar-Pathe-Ekanta-Apan-Bengali-Movie-Song-Asha-Bhosle.mp3"),
-      blank("Old Gold Song 16", "Add artist", ""),
-      blank("Old Gold Song 17", "Add artist", ""),
-      blank("Old Gold Song 18", "Add artist", ""),
-      blank("Old Gold Song 19", "Add artist", ""),
-      blank("Old Gold Song 20", "Add artist", "")
+      blank("Moner Janala Dhare",
+"Bengali Old Song",
+"songs/old-gold/01. Moner Janala Dhare.mp3"),
+
+blank("Dadhua Amar Chukhe",
+"Bengali Old Song",
+"songs/old-gold/02. Dadhua Amar Chukhe.mp3"),
+
+blank("Nam Harano",
+"Bengali Old Song",
+"songs/old-gold/003. Nam Harano.mp3"),
+
+blank("Jeona Dokhina Dare",
+"Bengali Old Song",
+"songs/old-gold/004. Jeona Dokhina Dare.mp3"),
+
+blank("Alo Borosa",
+"Bengali Old Song",
+"songs/old-gold/05 alo borosa.mp3"),
+
+blank("Moner Darja Khule Dilam",
+"Bengali Old Song",
+"songs/old-gold/05 MONER DARJA KHULE DILAM{AAMAR BHALOBASA}.mp3"),
+
+blank("Bombay Khub Dure Noy",
+"Bengali Old Song",
+"songs/old-gold/06 BOMBAY KHUB DURE NOY{AAMAR BHALOBASA}.mp3"),
+
+blank("Keu Bolche",
+"Bengali Old Song",
+"songs/old-gold/006. Keu Bolche.mp3"),
+
+blank("Raa",
+"Bengali Old Song",
+"songs/old-gold/006A_RAA.MP3"),
+
+blank("Jibon Purer",
+"Bengali Old Song",
+"songs/old-gold/07 jibon purer.MP3"),
+
+blank("Ke Ese Rakhikake",
+"Bengali Old Song",
+"songs/old-gold/07 KE ESE RAKHIKAKE{AAMAR BHALOBASA}.mp3"),
+
+blank("Shopno To Keu Dekhche Na",
+"Bengali Old Song",
+"songs/old-gold/007. Shopno To Keu Dekhche Na.mp3"),
+
+blank("Cholat Cholat Dheu",
+"Bengali Old Song",
+"songs/old-gold/008. Cholat Cholat Dheu.mp3"),
+
+blank("Basi",
+"Bengali Old Song",
+"songs/old-gold/09 basi.mp3"),
+
+blank("Cheleti Nam Megh",
+"Bengali Old Song",
+"songs/old-gold/009. Cheleti Nam Megh.mp3"),
+
+blank("Ami Khola Janala",
+"Bengali Old Song",
+"songs/old-gold/010. Ami Khola Janala.mp3"),
+
+blank("Tomer Kache",
+"Bengali Old Song",
+"songs/old-gold/011. Tomer Kache.mp3"),
+
+blank("Le",
+"Bengali Old Song",
+"songs/old-gold/011A_LE.MP3"),
+
+blank("Eka Eka",
+"Bengali Old Song",
+"songs/old-gold/012. Eka Eka.mp3"),
+
+blank("Ai Jh",
+"Bengali Old Song",
+"songs/old-gold/012AI_JH.MP3"),
+
+blank("Ghum Ghum Chand",
+"Bengali Old Song",
+"songs/old-gold/13. Ghum Ghum Chand.mp3"),
+
+blank("Pothe Pothe",
+"Bengali Old Song",
+"songs/old-gold/013. Pothe Pothe.mp3"),
+
+blank("Tomake Boler Chilo",
+"Bengali Old Song",
+"songs/old-gold/014. Tomake Boler Chilo.mp3"),
+
+blank("Ek Chilte Megh",
+"Bengali Old Song",
+"songs/old-gold/015. Ek Chilte Megh.mp3"),
+
+blank("Ami Ektu Amer Sange",
+"Bengali Old Song",
+"songs/old-gold/016. Ami Ektu Amer Sange.mp3"),
+
+blank("Gane Moor Koon",
+"Bengali Old Song",
+"songs/old-gold/16. Gane Moor Koon.mp3"),
+
+blank("Ami Tar Chhalonai",
+"Bengali Old Song",
+"songs/old-gold/17.Ami Tar Chhalonai.mp3"),
+
+blank("Tumi Jamoni Nupuri Hayo",
+"Bengali Old Song",
+"songs/old-gold/033 TUMI JAMONI NUPURI HAYO.mp3"),
+
+blank("Balo To Ki Kore Ghar Bandha",
+"Bengali Old Song",
+"songs/old-gold/040 BALO TO KI KORE GHAR BANDHA.mp3"),
+
+blank("Uru Uru Mon Aaj",
+"Bappi Lahiri & Alka Yagnik",
+"songs/old-gold/055 URU URU MON AAJ(BAPPI LAHERI & ALKA YAGNIK).mp3"),
+
+blank("Kanacher Churir Chhatay",
+"Bengali Old Song",
+"songs/old-gold/a kanacher churir chhatay.mp3"),
+
+blank("Akasher Astaragey",
+"Bengali Old Song",
+"songs/old-gold/AKASHER ASTARAGEY_SURYAMUKHI.mp3"),
+
+blank("Mixer In Track 15",
+"Bengali Old Song",
+"songs/old-gold/Artist - mixer in track 15.mp3"),
+
+blank("Kono Din Bala Kara",
+"Bengali Old Song",
+"songs/old-gold/B KONO DIN BALA KARA.mp3"),
+
+blank("Mona Koro Aami Nai",
+"Bengali Old Song",
+"songs/old-gold/b mona koro aami nai.mp3"),
+
+blank("O Kokila Tore Sudhai Re",
+"Bengali Old Song",
+"songs/old-gold/B O KOKILA TORE SUDHAI RE.mp3"),
+
+blank("Aaj Bikele Dake",
+"Bengali Old Song",
+"songs/old-gold/c aaj bikele dake.mp3"),
+
+blank("Aamar Sapna Dekha",
+"Bengali Old Song",
+"songs/old-gold/d aamar sapna dekha.mp3"),
+
+blank("Aar Kato Rahibo",
+"Bengali Old Song",
+"songs/old-gold/D AAR KATO RAHIBO.mp3"),
+
+blank("Ache Gour Nitai",
+"Bengali Old Song",
+"songs/old-gold/d ache gour nitai.mp3"),
+
+blank("Asho Asho Prio",
+"Bengali Old Song",
+"songs/old-gold/e asho asho prio.mp3"),
+
+blank("Bharat Aamar Bharat Barsho",
+"Bengali Old Song",
+"songs/old-gold/E BHARAT AAMAR BHARAT BARSHO.mp3"),
+
+blank("Gane Prajapati",
+"Bengali Old Song",
+"songs/old-gold/E GANE PRAJAPATI_DEYA NEYA.mp3"),
+
+blank("Sudhu Ganer Din",
+"Bengali Old Song",
+"songs/old-gold/E SUDHU GANER DIN_PATHE HOLO DERI.mp3"),
+
+blank("Ei Path Jadi Na Sesh Hoi",
+"Hemanta Mukherjee & Sandhya Mukherjee",
+"songs/old-gold/EI PATH JADI NA SESH HOI_SAPTAPADI_HEMANTA-SANDHYA.mp3"),
+
+blank("Khub Jante Ichhe Kore",
+"Bengali Old Song",
+"songs/old-gold/F KHUB JANTE ICHHE KORE.mp3"),
+
+blank("Mity Mity Tarara",
+"Bengali Old Song",
+"songs/old-gold/f mity mity tarara.mp3"),
+
+blank("Muchhe Jaoa Din Guli",
+"Bengali Old Song",
+"songs/old-gold/F MUCHHE JAOA DIN GULI.mp3"),
+
+blank("Dash Bachhrer Banshi",
+"Bengali Old Song",
+"songs/old-gold/g_DASH BACHHRER BANSHI.mp3"),
+
+blank("Hridaer Gaan Sikhe",
+"Bengali Old Song",
+"songs/old-gold/G HRIDAER GAAN SIKHE.mp3"),
+
+blank("Sai Gan Keno Aami",
+"Bengali Old Song",
+"songs/old-gold/g sai gan keno aami.mp3"),
+
+blank("Ghum Ghum Chand",
+"Bengali Old Song",
+"songs/old-gold/GHUM GHUM CHAND_SABAR UPARE.mp3"),
+
+blank("Ja Ja Ja Ure",
+"Bengali Old Song",
+"songs/old-gold/h ja ja ja ure.mp3"),
+
+blank("Jadi Kagaje Lekho Naam",
+"Bengali Old Song",
+"songs/old-gold/I JADI KAGAJE LEKHO NAAM.mp3"),
+
+blank("Mon Metechhe Mon",
+"Bengali Old Song",
+"songs/old-gold/i mon metechhe mon.mp3"),
+
+blank("Janina Phurabe Kabe",
+"Bengali Old Song",
+"songs/old-gold/JANINA PHURABE KABE_SABAR UPARE.mp3"),
+
+blank("Ka Fota Chokher Jal",
+"Bengali Old Song",
+"songs/old-gold/K KA FOTA CHOKHER JAL.mp3"),
+
+blank("Keno E Hriday",
+"Bengali Old Song",
+"songs/old-gold/KENO E HRIDAY_NAYIKA SAMBAD.mp3"),
+
+blank("Ki Mishti Dekho Mishti",
+"Bengali Old Song",
+"songs/old-gold/KI MISHTI DEKHO MISHTI_ANTONY PHRINGI.mp3"),
+
+blank("Coffee Houser Sri Aada",
+"Bengali Old Song",
+"songs/old-gold/L COFFEE HOUSER SRI AADA.mp3"),
+
+blank("Raag Je Tomar Mishti",
+"Hemanta Mukherjee & Sandhya Mukherjee",
+"songs/old-gold/RAAG JE TOMAR MISHTI_PITA PUTRA_HEMANTA-SANDHYA.mp3"),
+
+blank("Sankha Bajiye Make",
+"Bengali Old Song",
+"songs/old-gold/SANKHA BAJIYE MAKE_DABI.mp3"),
+
+blank("Saradin Tomar Kathai",
+"Shyamal Mitra & Sandhya Mukherjee",
+"songs/old-gold/SARADIN TOMAR KATHAI_ANTARAL_SHYAMAL-SANDHYA.mp3"),
+
+blank("Teer Bendha Pakhi",
+"Bengali Old Song",
+"songs/old-gold/TEER BENDHA PAKHI_PITAPUTRA.mp3"),
+
+blank("Tomake Sonate Gaan",
+"Bengali Old Song",
+"songs/old-gold/tomake sonate gaan.mp3")
     ]
   },
 
