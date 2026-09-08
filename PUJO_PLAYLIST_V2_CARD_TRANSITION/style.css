@@ -1496,3 +1496,463 @@ body.pujo-entering .intro-content {
     font-size: 3.5px;
   }
 }
+/* =========================================
+   PUJO PANDAL MAP
+   ========================================= */
+
+.map-view {
+  padding: 34px clamp(18px, 4vw, 60px) 120px;
+}
+
+.map-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 24px;
+}
+
+.map-title .badge {
+  display: inline-flex;
+  margin-bottom: 15px;
+}
+
+.map-title > small {
+  display: block;
+  margin-bottom: 7px;
+
+  font-size: 7px;
+  letter-spacing: 3px;
+  color: rgba(230, 200, 145, 0.55);
+}
+
+.map-title h2 {
+  margin: 0;
+  font-size: clamp(38px, 5vw, 72px);
+  line-height: .95;
+  font-weight: 500;
+  color: #f3e4c9;
+}
+
+.map-title h2 b {
+  color: #dca943;
+}
+
+.map-title p {
+  margin: 15px 0 0;
+  max-width: 520px;
+
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(240, 220, 190, 0.62);
+}
+
+
+/* TOOLS */
+
+.map-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.map-search {
+  min-width: 230px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 13px;
+
+  border: 1px solid rgba(220, 169, 67, 0.22);
+  border-radius: 999px;
+
+  background: rgba(12, 5, 2, 0.55);
+  backdrop-filter: blur(12px);
+}
+
+.map-search span {
+  color: #dca943;
+}
+
+.map-search input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+  background: transparent;
+
+  color: #ead9bb;
+  font-size: 11px;
+}
+
+.map-search input::placeholder {
+  color: rgba(230, 210, 180, 0.38);
+}
+
+.map-city-filter {
+  height: 42px;
+  padding: 0 14px;
+
+  border: 1px solid rgba(220, 169, 67, 0.22);
+  border-radius: 999px;
+
+  outline: none;
+
+  background: #160b06;
+  color: #c8aa76;
+
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+
+/* MAP AREA */
+
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+}
+
+.map-stage {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 560px;
+
+  border: 1px solid rgba(220, 169, 67, 0.22);
+  border-radius: 24px;
+
+  background: #120906;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, .35),
+    inset 0 0 70px rgba(220, 169, 67, .03);
+}
+
+#pujoMap {
+  width: 100%;
+  height: 560px;
+  z-index: 1;
+}
+
+.map-corner-label {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+
+  z-index: 500;
+
+  padding: 10px 13px;
+
+  border: 1px solid rgba(220, 169, 67, 0.24);
+  border-radius: 12px;
+
+  background: rgba(12, 5, 2, .77);
+  backdrop-filter: blur(12px);
+
+  pointer-events: none;
+}
+
+.map-corner-label span,
+.map-corner-label strong {
+  display: block;
+}
+
+.map-corner-label span {
+  margin-bottom: 3px;
+  font-size: 6px;
+  letter-spacing: 2px;
+  color: #dca943;
+}
+
+.map-corner-label strong {
+  font-size: 6px;
+  letter-spacing: 1px;
+  color: rgba(238, 217, 180, .62);
+}
+
+
+/* CUSTOM DIYA MARKER */
+
+.pujo-map-marker {
+  background: none !important;
+  border: none !important;
+}
+
+.pujo-map-marker span {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 195, 75, .55);
+  border-radius: 50%;
+
+  background: rgba(35, 12, 4, .88);
+
+  font-size: 20px;
+
+  box-shadow:
+    0 0 12px rgba(255, 174, 40, .75),
+    0 0 28px rgba(220, 120, 20, .35);
+
+  transition: .25s ease;
+}
+
+.pujo-map-marker span:hover {
+  transform: scale(1.14);
+}
+
+
+/* RIGHT DETAILS PANEL */
+
+.pandal-info {
+  min-height: 560px;
+  padding: 22px;
+
+  border: 1px solid rgba(220, 169, 67, 0.20);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(220, 169, 67, .055),
+      rgba(12, 5, 2, .76)
+    );
+
+  backdrop-filter: blur(18px);
+}
+
+.pandal-info-empty {
+  min-height: 510px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.pandal-info-icon {
+  margin-bottom: 18px;
+
+  font-size: 38px;
+
+  filter: drop-shadow(0 0 18px rgba(220, 169, 67, .5));
+}
+
+.pandal-info-empty small,
+.pandal-details > small {
+  font-size: 6px;
+  letter-spacing: 2px;
+  color: #9d8057;
+}
+
+.pandal-info h3 {
+  margin: 8px 0;
+  color: #efdcb7;
+}
+
+.pandal-info p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: rgba(235, 215, 185, .55);
+}
+
+
+/* SELECTED PANDAL */
+
+.pandal-details {
+  display: none;
+}
+
+.pandal-details.show {
+  display: block;
+}
+
+.pandal-type {
+  display: inline-block;
+
+  margin: 15px 0 10px;
+  padding: 6px 9px;
+
+  border: 1px solid rgba(220, 169, 67, .25);
+  border-radius: 999px;
+
+  color: #d8b46f;
+
+  font-size: 6px;
+  letter-spacing: 1.2px;
+}
+
+.pandal-location {
+  padding: 13px 0;
+  border-top: 1px solid rgba(220, 169, 67, .12);
+  border-bottom: 1px solid rgba(220, 169, 67, .12);
+
+  font-size: 10px;
+  color: #b89c70;
+}
+
+.pandal-actions {
+  display: grid;
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+.pandal-actions button {
+  width: 100%;
+  min-height: 40px;
+
+  border: 1px solid rgba(220, 169, 67, .28);
+  border-radius: 999px;
+
+  background: rgba(220, 169, 67, .06);
+  color: #d6b878;
+
+  font-size: 7px;
+  letter-spacing: 1.3px;
+
+  cursor: pointer;
+}
+
+.pandal-actions button:hover {
+  background: rgba(220, 169, 67, .13);
+}
+
+
+/* BOTTOM FEATURES */
+
+.map-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  margin-top: 14px;
+}
+
+.map-features article {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px;
+
+  border: 1px solid rgba(220, 169, 67, .14);
+  border-radius: 16px;
+
+  background: rgba(15, 7, 3, .38);
+}
+
+.map-features article > span {
+  font-size: 20px;
+  color: #dca943;
+}
+
+.map-features strong,
+.map-features small {
+  display: block;
+}
+
+.map-features strong {
+  margin-bottom: 3px;
+
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: #c9a96f;
+}
+
+.map-features small {
+  font-size: 8px;
+  color: rgba(220, 205, 180, .45);
+}
+
+
+/* LEAFLET DARKER LOOK */
+
+.leaflet-control-zoom a {
+  background: #190c06 !important;
+  color: #dca943 !important;
+  border-color: rgba(220, 169, 67, .2) !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #180b06;
+  color: #ead7b4;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  .map-view {
+    padding: 24px 14px 120px;
+  }
+
+  .map-hero {
+    display: block;
+  }
+
+  .map-tools {
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+
+  .map-search {
+    width: 100%;
+  }
+
+  .map-city-filter {
+    flex: 1;
+  }
+
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-stage,
+  #pujoMap {
+    height: 470px;
+    min-height: 470px;
+  }
+
+  .pandal-info {
+    min-height: auto;
+  }
+
+  .pandal-info-empty {
+    min-height: 230px;
+  }
+
+  .map-features {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    overflow-x: auto;
+  }
+
+  .nav-link {
+    flex: 0 0 auto;
+  }
+}
+.install-experience-note {
+  margin: 8px 0 0;
+  font-size: 9px;
+  line-height: 1.6;
+  letter-spacing: .4px;
+  color: rgba(235, 216, 180, .5);
+  text-align: center;
+}

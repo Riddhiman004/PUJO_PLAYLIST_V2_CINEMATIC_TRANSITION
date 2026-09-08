@@ -9,6 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
+  <!-- LEAFLET MAP -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
   <link rel="manifest" href="/manifest.json">
 </head>
 <body class="evening">
@@ -110,6 +115,7 @@
     <button class="nav-link" data-view="playlist-old" type="button">♫ OLD GOLD</button>
     <button class="nav-link" data-view="playlist-new" type="button">♟ NEW DANCE</button>
     <button class="nav-link" data-view="mahalaya" type="button">🔱 MAHALAYA</button>
+    <button class="nav-link" data-view="pujo-map" type="button">🗺 PUJO MAP</button>
   </nav>
 
   <main>
@@ -199,6 +205,7 @@
           <div class="vibe-meter"><i id="vibeFill"></i></div>
         </div>
         <button id="installAppBtn" class="install-app-btn" type="button">
+          
   <span>⬇</span>
   <span>
     <small>TAKE PUJO WITH YOU</small>
@@ -206,6 +213,9 @@
   </span>
   <b>→</b>
 </button>
+<p class="install-experience-note">
+  🎧 For the best background music experience, install PUJO PLAYLIST as an app.
+</p>
       </div>
     </section>
 
@@ -410,6 +420,140 @@
         <small>মহালয়ার ভোর · দেবীপক্ষের আহ্বান</small>
       </div>
     </section>
+    <!-- =========================================
+     PUJO PANDAL MAP
+     ========================================= -->
+
+<section id="pujo-map" class="view map-view">
+
+  <button class="back-btn" data-open="home" type="button">
+    ← BACK TO PUJO
+  </button>
+
+  <div class="map-hero">
+
+    <div class="map-title">
+      <span class="badge">🗺 PUJO MAP</span>
+
+      <small>EXPLORE SHARODIYA</small>
+
+      <h2>PANDAL <b>MAP</b></h2>
+
+      <p>
+        কলকাতা থেকে কল্যাণী — খুঁজে নাও তোমার পছন্দের পুজো।
+      </p>
+    </div>
+
+
+    <div class="map-tools">
+
+      <label class="map-search">
+        <span>⌕</span>
+
+        <input
+          id="pandalSearch"
+          type="search"
+          placeholder="Search pandal or area..."
+          autocomplete="off"
+        >
+      </label>
+
+
+      <select id="pandalCityFilter" class="map-city-filter">
+
+        <option value="all">ALL PLACES</option>
+        <option value="kolkata">KOLKATA</option>
+        <option value="kalyani">KALYANI</option>
+        <option value="chinsurah">CHINSURAH</option>
+        <option value="howrah">HOWRAH</option>
+        <option value="salt-lake">SALT LAKE</option>
+        <option value="new-town">NEW TOWN</option>
+
+      </select>
+
+
+      <button
+        id="nearMeBtn"
+        class="gold-btn compact"
+        type="button"
+      >
+        ◎ NEAR ME
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="map-layout">
+
+    <!-- ACTUAL MAP -->
+    <div class="map-stage">
+
+      <div id="pujoMap"></div>
+
+      <div class="map-corner-label">
+        <span>SHARODIYA 2026</span>
+        <strong>EXPLORE • DISCOVER • CELEBRATE</strong>
+      </div>
+
+    </div>
+
+
+    <!-- PANDAL INFORMATION -->
+    <aside id="pandalInfo" class="pandal-info">
+
+      <div class="pandal-info-empty">
+
+        <span class="pandal-info-icon">🪔</span>
+
+        <small>PUJO EXPLORER</small>
+
+        <h3>Choose a Pandal</h3>
+
+        <p>
+          Map-এর কোনো marker touch করলে এখানে
+          pandal-এর details দেখতে পাবি।
+        </p>
+
+      </div>
+
+      <div id="pandalDetails" class="pandal-details"></div>
+
+    </aside>
+
+  </div>
+
+
+  <div class="map-features">
+
+    <article>
+      <span>◎</span>
+      <div>
+        <strong>NEAR ME</strong>
+        <small>Find pandals around your current location.</small>
+      </div>
+    </article>
+
+    <article>
+      <span>↗</span>
+      <div>
+        <strong>DIRECTIONS</strong>
+        <small>Open navigation directly in Google Maps.</small>
+      </div>
+    </article>
+
+    <article>
+      <span>♡</span>
+      <div>
+        <strong>FAVOURITES</strong>
+        <small>Save pandals you want to visit.</small>
+      </div>
+    </article>
+
+  </div>
+
+</section>
   </main>
 
   <!-- MOOD PANEL -->
@@ -444,6 +588,7 @@
 
   <div id="toast" class="toast"></div>
   <audio id="audio" preload="metadata"></audio>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script src="./songs.js"></script>
   <script src="./script.js"></script>
@@ -451,7 +596,7 @@
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
       navigator.serviceWorker
-        .register("/sw.js", { updateViaCache: "none" })
+        .register("./sw.js", { updateViaCache: "none" })
         .then(() => console.log("PUJO PLAYLIST Service Worker registered"))
         .catch(err => console.error("Service Worker registration failed:", err));
     });
