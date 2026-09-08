@@ -1088,19 +1088,73 @@ function setupMediaSession() {
 
 
   setMediaAction(
-    "nexttrack",
-    () => {
-      nextSong();
+  "nexttrack",
+  async () => {
+
+    const nextIndex =
+      findNextIndex(1);
+
+    if (nextIndex < 0) return;
+
+    loadSong(
+      activePlaylistKey,
+      nextIndex,
+      false
+    );
+
+    try {
+
+      await audio.play();
+
+      navigator.mediaSession.playbackState =
+        "playing";
+
+    } catch (error) {
+
+      console.log(
+        "Notification next failed:",
+        error
+      );
+
     }
-  );
+
+  }
+);
 
 
   setMediaAction(
-    "previoustrack",
-    () => {
-      previousSong();
+  "previoustrack",
+  async () => {
+
+    const previousIndex =
+      findNextIndex(-1);
+
+    if (previousIndex < 0) return;
+
+    loadSong(
+      activePlaylistKey,
+      previousIndex,
+      false
+    );
+
+    try {
+
+      await audio.play();
+
+      navigator.mediaSession.playbackState =
+        "playing";
+
+    } catch (error) {
+
+      console.log(
+        "Notification previous failed:",
+        error
+      );
+
     }
-  );
+
+  }
+);
 
 
   setMediaAction(
