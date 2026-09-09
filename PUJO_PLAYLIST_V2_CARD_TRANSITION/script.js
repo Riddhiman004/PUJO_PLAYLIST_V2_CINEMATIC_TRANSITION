@@ -3788,3 +3788,357 @@ function calculateDistance(
   );
 
 }
+/* =========================================
+   PUJO EMERGENCY / SOS
+   ========================================= */
+
+function setupPujoEmergency() {
+
+  const openBtn =
+    document.getElementById(
+      "pujoEmergencyBtn"
+    );
+
+  const panel =
+    document.getElementById(
+      "pujoEmergencyPanel"
+    );
+
+  const closeBtn =
+    document.getElementById(
+      "closePujoEmergency"
+    );
+
+  const hospitalBtn =
+    document.getElementById(
+      "nearestHospitalBtn"
+    );
+
+  const policeBtn =
+    document.getElementById(
+      "nearestPoliceBtn"
+    );
+
+  const shareBtn =
+    document.getElementById(
+      "shareEmergencyLocationBtn"
+    );
+
+  const status =
+    document.getElementById(
+      "emergencyLocationStatus"
+    );
+
+
+  if (
+    !openBtn ||
+    !panel
+  ) {
+    return;
+  }
+
+
+  function openEmergencyPanel() {
+
+    panel.hidden = false;
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+
+  function closeEmergencyPanel() {
+
+    panel.hidden = true;
+
+    document.body.style.overflow =
+      "";
+
+  }
+
+
+  openBtn.addEventListener(
+    "click",
+    openEmergencyPanel
+  );
+
+
+  closeBtn?.addEventListener(
+    "click",
+    closeEmergencyPanel
+  );
+
+
+  panel.addEventListener(
+    "click",
+    event => {
+
+      if (
+        event.target === panel
+      ) {
+
+        closeEmergencyPanel();
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Escape" &&
+        !panel.hidden
+      ) {
+
+        closeEmergencyPanel();
+
+      }
+
+    }
+  );
+
+
+  function getEmergencyLocation(
+    callback
+  ) {
+
+    if (
+      !navigator.geolocation
+    ) {
+
+      if (status) {
+
+        status.textContent =
+          "Location is not supported on this device.";
+
+      }
+
+      return;
+
+    }
+
+
+    if (status) {
+
+      status.textContent =
+        "Getting your current location…";
+
+    }
+
+
+    navigator.geolocation.getCurrentPosition(
+
+      position => {
+
+        const lat =
+          position.coords.latitude;
+
+        const lng =
+          position.coords.longitude;
+
+
+        if (status) {
+
+          status.textContent =
+            "Current location found ✓";
+
+        }
+
+
+        callback(
+          lat,
+          lng
+        );
+
+      },
+
+      () => {
+
+        if (status) {
+
+          status.textContent =
+            "Location permission was not available.";
+
+        }
+
+      },
+
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 30000
+      }
+
+    );
+
+  }
+
+
+  hospitalBtn?.addEventListener(
+    "click",
+    () => {
+
+      getEmergencyLocation(
+        (lat, lng) => {
+
+          const query =
+            encodeURIComponent(
+              `hospital near ${lat},${lng}`
+            );
+
+
+          window.open(
+            `https://www.google.com/maps/search/?api=1&query=${query}`,
+            "_blank",
+            "noopener"
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  policeBtn?.addEventListener(
+    "click",
+    () => {
+
+      getEmergencyLocation(
+        (lat, lng) => {
+
+          const query =
+            encodeURIComponent(
+              `police station near ${lat},${lng}`
+            );
+
+
+          window.open(
+            `https://www.google.com/maps/search/?api=1&query=${query}`,
+            "_blank",
+            "noopener"
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  shareBtn?.addEventListener(
+    "click",
+    () => {
+
+      getEmergencyLocation(
+        async (lat, lng) => {
+
+          const locationUrl =
+            `https://maps.google.com/?q=${lat},${lng}`;
+
+
+          const shareData = {
+
+            title:
+              "My Current Location",
+
+            text:
+              "My current location:",
+
+            url:
+              locationUrl
+
+          };
+
+
+          if (
+            navigator.share
+          ) {
+
+            try {
+
+              await navigator.share(
+                shareData
+              );
+
+              if (status) {
+
+                status.textContent =
+                  "Location sharing opened ✓";
+
+              }
+
+              return;
+
+            } catch (error) {
+
+              if (
+                error.name ===
+                "AbortError"
+              ) {
+
+                return;
+
+              }
+
+            }
+
+          }
+
+
+          try {
+
+            await navigator.clipboard.writeText(
+              locationUrl
+            );
+
+
+            if (status) {
+
+              status.textContent =
+                "Location link copied ✓";
+
+            }
+
+          } catch {
+
+            if (status) {
+
+              status.textContent =
+                locationUrl;
+
+            }
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* Run separately — existing init() untouched */
+
+if (
+  document.readyState ===
+  "loading"
+) {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    setupPujoEmergency
+  );
+
+} else {
+
+  setupPujoEmergency();
+
+}
