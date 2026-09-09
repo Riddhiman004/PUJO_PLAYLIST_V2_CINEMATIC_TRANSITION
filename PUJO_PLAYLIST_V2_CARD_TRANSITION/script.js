@@ -1723,6 +1723,28 @@ function initPujoMap() {
       "input",
       renderPandalMarkers
     );
+    const exactSearchInput =
+  document.getElementById("pandalSearch");
+
+exactSearchInput?.addEventListener(
+  "keydown",
+  async event => {
+
+    if (event.key !== "Enter") return;
+
+    const query =
+      exactSearchInput.value.trim();
+
+    if (query.length < 2) return;
+
+    
+
+    await searchExactMapLocation(
+      query
+    );
+
+  }
+);
 
 
   /* NEAR ME */
@@ -2655,6 +2677,439 @@ function getPandalType(tags) {
 /* =========================================
    RENDER MARKERS
    ========================================= */
+   /* =========================================
+   EXACT MAP LOCATION SEARCH
+   ========================================= */
+
+function escapeMapSearchRegex(value) {
+
+  return String(value)
+    .replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&"
+    );
+
+}
+
+
+async function searchExactMapLocation(
+  searchText
+) {
+
+  if (
+    !pandalMap ||
+    !pandalMarkerLayer
+  ) {
+    return;
+  }
+
+
+  const selectedCity =
+    document.getElementById(
+      "pandalCityFilter"
+    )?.value || "kolkata";
+
+
+  const city =
+    PUJO_CITIES[selectedCity] ||
+    PUJO_CITIES.kolkata;
+
+
+  /*
+     Nominatim viewbox format:
+     west,north,east,south
+
+     এটা selected city-এর আশেপাশের
+     result-কে priority দেবে,
+     কিন্তু completely block করবে না.
+  */
+
+  const [
+    south,
+    west,
+    north,
+    east
+  ] = city.bbox;
+
+
+  const viewbox =
+    `${west},${north},${east},${south}`;
+
+
+  showToast(
+    `Searching "${searchText}"...`
+  );
+
+
+  async function runLocationSearch(
+    query
+  ) {
+
+    const url =
+      "https://nominatim.openstreetmap.org/search" +
+      "?format=jsonv2" +
+      "&limit=10" +
+      "&countrycodes=in" +
+      "&addressdetails=1" +
+      "&namedetails=1" +
+      "&bounded=0" +
+      "&viewbox=" +
+      encodeURIComponent(viewbox) +
+      "&q=" +
+      encodeURIComponent(
+        `${query}, West Bengal, India`
+      );
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          headers: {
+            "Accept":
+              "application/json"
+          }
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `Search HTTP ${response.status}`
+      );
+
+    }
+
+
+    return await response.json();
+
+  }
+
+
+  try {
+
+    /*
+       FIRST TRY:
+       User যা লিখেছে exactly সেটা
+    */
+
+    let results =
+      await runLocationSearch(
+        searchText
+      );
+
+
+    /*
+       SECOND TRY:
+       Sree Bhumi → Sreebhumi
+
+       অনেক OSM জায়গার spelling-এ
+       space থাকে না.
+    */
+
+    if (
+      !Array.isArray(results) ||
+      !results.length
+    ) {
+
+      const joinedName =
+        searchText.replace(
+          /\s+/g,
+          ""
+        );
+
+
+      if (
+        joinedName.toLowerCase() !==
+        searchText
+          .toLowerCase()
+          .replace(/\s+/g, "")
+      ) {
+
+        results =
+          await runLocationSearch(
+            joinedName
+          );
+
+      } else {
+
+        results =
+          await runLocationSearch(
+            joinedName
+          );
+
+      }
+
+    }
+
+
+    /*
+       THIRD TRY:
+       Puja club হলে Sporting Club
+       নামেও map-এ থাকতে পারে.
+    */
+
+    if (
+      !Array.isArray(results) ||
+      !results.length
+    ) {
+
+      results =
+        await runLocationSearch(
+          `${searchText} Sporting Club`
+        );
+
+    }
+
+
+    if (
+      !Array.isArray(results) ||
+      !results.length
+    ) {
+
+      showToast(
+        `"${searchText}" not found on map`
+      );
+
+      return;
+
+    }
+
+
+    /*
+       Selected city-এর center-এর
+       সবচেয়ে কাছের result choose করি.
+    */
+
+    results =
+      results
+        .map(place => {
+
+          const lat =
+            Number(place.lat);
+
+          const lng =
+            Number(place.lon);
+
+
+          const distance =
+            calculateDistance(
+              city.center[0],
+              city.center[1],
+              lat,
+              lng
+            );
+
+
+          return {
+            ...place,
+            _distance:
+              distance
+          };
+
+        })
+        .filter(place =>
+          Number.isFinite(
+            Number(place.lat)
+          ) &&
+          Number.isFinite(
+            Number(place.lon)
+          )
+        );
+
+
+    results.sort(
+      (a, b) =>
+        a._distance -
+        b._distance
+    );
+
+
+    const place =
+      results[0];
+
+
+    const lat =
+      Number(place.lat);
+
+    const lng =
+      Number(place.lon);
+
+
+    const address =
+      place.address || {};
+
+
+    const area =
+      address.neighbourhood ||
+      address.suburb ||
+      address.quarter ||
+      address.city_district ||
+      address.town ||
+      address.city ||
+      address.county ||
+      "West Bengal";
+
+
+    const detectedCity =
+      getCityForCoordinates(
+        lat,
+        lng,
+        selectedCity === "all"
+          ? null
+          : selectedCity
+      );
+
+
+    const mapPlace = {
+
+      id:
+        `search-${place.place_id}`,
+
+      name:
+        place.namedetails?.name ||
+        place.name ||
+        searchText,
+
+      city:
+        detectedCity,
+
+      cityLabel:
+        PUJO_CITIES[
+          detectedCity
+        ]?.label ||
+        address.city ||
+        "West Bengal",
+
+      area,
+
+      type:
+        "Map Search Result",
+
+      lat,
+
+      lng,
+
+      description:
+        place.display_name ||
+        `${searchText} · location found on map.`
+
+    };
+
+
+    pandalMarkerLayer
+      .clearLayers();
+
+
+    const searchIcon =
+      L.divIcon({
+
+        className:
+          "pujo-map-marker exact-search-marker",
+
+        html:
+          "<span>📍</span>",
+
+        iconSize:
+          [48, 48],
+
+        iconAnchor:
+          [24, 40]
+
+      });
+
+
+    const marker =
+      L.marker(
+        [
+          lat,
+          lng
+        ],
+        {
+
+          icon:
+            searchIcon,
+
+          interactive:
+            true,
+
+          keyboard:
+            true,
+
+          riseOnHover:
+            true,
+
+          bubblingMouseEvents:
+            false
+
+        }
+      )
+      .addTo(
+        pandalMarkerLayer
+      );
+
+
+    marker.bindTooltip(
+      mapPlace.name,
+      {
+
+        direction:
+          "top",
+
+        offset:
+          [0, -25]
+
+      }
+    );
+
+
+    marker.on(
+      "click",
+      () => {
+
+        openPandalMarkerDetails(
+          mapPlace
+        );
+
+      }
+    );
+
+
+    pandalMap.setView(
+      [
+        lat,
+        lng
+      ],
+      16
+    );
+
+
+    openPandalMarkerDetails(
+      mapPlace
+    );
+
+
+    showToast(
+      `${mapPlace.name} found 📍`
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Exact location search failed:",
+      error
+    );
+
+
+    showToast(
+      "Location search failed. Check internet and try again."
+    );
+
+  }
+
+}
 
 function renderPandalMarkers() {
 
@@ -2720,10 +3175,10 @@ function renderPandalMarkers() {
         "<span>🪔</span>",
 
       iconSize:
-        [36, 36],
+  [48, 48],
 
-      iconAnchor:
-        [18, 18]
+iconAnchor:
+  [24, 24]
 
     });
 
@@ -2743,8 +3198,12 @@ function renderPandalMarkers() {
           ],
 
           {
-            icon: diyaIcon
-          }
+  icon: diyaIcon,
+  interactive: true,
+  keyboard: true,
+  riseOnHover: true,
+  bubblingMouseEvents: false
+}
 
         );
 
@@ -2762,15 +3221,15 @@ function renderPandalMarkers() {
 
 
       marker.on(
-        "click",
-        () => {
+  "click",
+  () => {
 
-          showPandalDetails(
-            pandal
-          );
+    openPandalMarkerDetails(
+      pandal
+    );
 
-        }
-      );
+  }
+);
 
 
       marker.addTo(
@@ -2833,6 +3292,41 @@ function renderPandalMarkers() {
 /* =========================================
    PANDAL DETAILS
    ========================================= */
+   function openPandalMarkerDetails(
+  pandal
+) {
+
+  showPandalDetails(
+    pandal
+  );
+
+
+  if (
+    window.innerWidth <= 900
+  ) {
+
+    setTimeout(
+      () => {
+
+        document
+          .getElementById(
+            "pandalInfo"
+          )
+          ?.scrollIntoView({
+            behavior:
+              "smooth",
+
+            block:
+              "start"
+          });
+
+      },
+      100
+    );
+
+  }
+
+}
 
 function showPandalDetails(
   pandal

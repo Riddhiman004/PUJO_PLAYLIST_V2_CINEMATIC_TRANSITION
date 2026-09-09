@@ -1956,3 +1956,31 @@ body.pujo-entering .intro-content {
   color: rgba(235, 216, 180, .5);
   text-align: center;
 }
+/* Better mobile map marker touch */
+
+.pujo-map-marker {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  touch-action: manipulation;
+}
+
+.pujo-map-marker span {
+  pointer-events: none !important;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.exact-search-marker span {
+  font-size: 30px;
+}
+
+.map-corner-label,
+.map-stage::before,
+.map-stage::after {
+  pointer-events: none !important;
+}
